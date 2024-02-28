@@ -1,7 +1,7 @@
 const path = require("path");
 module.exports = (env, options) => {
   const isProd = options.mode === "production";
-  
+
   const config = {
     mode: isProd ? "production" : "development",
     devtool: isProd ? "eval" : "source-map",
@@ -10,6 +10,7 @@ module.exports = (env, options) => {
     output: {
       path: path.resolve(__dirname, "dist"),
       filename: "main.js",
+      assetModuleFilename: "static/images/[hash][ext]",
       clean: true,
     },
     module: {
@@ -27,6 +28,14 @@ module.exports = (env, options) => {
         {
           test: /\.s[ac]ss$/,
           use: ["style-loader", "css-loader", "sass-loader"],
+        },
+        {
+          test: /\.html$/,
+          loader: "html-loader",
+        },
+        {
+          test: /\.(png|svg|jpg|jpeg)$/,
+          type: "asset",
         },
       ],
     },

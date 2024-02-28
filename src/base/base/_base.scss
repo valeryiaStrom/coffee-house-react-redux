@@ -1,0 +1,45 @@
+html {
+  font-size: $font-size-root;
+  scroll-behavior: smooth;
+}
+
+.body {
+  @include font(1.6rem, normal, 400, 2.4rem);
+  @extend %font-primary;
+  color: $color-text-dark;
+  background-color: $color-bg-body;
+  padding-bottom: 40px;
+
+  @include media-mobile-large {
+    padding: 0 16px 40px 16px;
+  }
+
+  &_unscrollable {
+    overflow: hidden;
+  }
+}
+
+h1 {
+  @include font(7.2rem, normal, 600, 7.56rem);
+
+  @include media-mobile-large {
+    @include font(4.2rem, normal, 600, 4.83rem);
+  }
+}
+
+h2 {
+  @include font(6rem, normal, 600, 7.5rem);
+
+  @include media-mobile-large {
+    @include font(3.2rem, normal, 600, 4rem);
+  }
+}
+
+h3 {
+  @include font(2.4rem, normal, 600, 3rem);
+}
+
+.text-accented {
+  color: $color-text-accent;
+  font-style: italic;
+}

@@ -1,5 +1,23 @@
+@import "../base/normalize/normalize";
+
+// Abstracts
+@import "../abstracts/constants/constants";
+@import "../abstracts/placeholders/placeholders";
+@import "../abstracts/mixins/mixins";
+
+// Base
+@import "../base/base/base";
+@import "../base/logo/logo";
+@import "../base/wrapper/wrapper";
+@import "../base/icons/icons";
+@import "../base/burger-button/burger-button";
+
+// Components
+@import "../components/header/header";
+@import "../components/navigation/navigation";
+@import "../components//mobile-navigation/mobile-navigation";
+
 .App {
-    margin: 1rem;
-    font-family: Arial, Helvetica, sans-serif;
-    color: green;
-  }
+  font-family: Arial, Helvetica, sans-serif;
+  color: green;
+}

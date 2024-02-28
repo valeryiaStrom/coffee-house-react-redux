@@ -1,0 +1,17 @@
+.icon {
+    display: inline-block;
+    cursor: pointer;
+    @extend %transition;
+  }
+  
+  .icon_coffee {
+    background-image: url("~/src/assets/images/icons/coffee-cup.svg");
+    width: 20px;
+    height: 20px;
+  }
+
+  .icon_coffee-mobile-menu {
+    background-image: url("~/src/assets/images/icons/coffee-cup-burger-menu.svg");
+    width: 40px;
+    height: 40px;
+  }
