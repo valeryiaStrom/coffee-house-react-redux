@@ -1,0 +1,79 @@
+.hero__wrapper {
+    padding: 100px;
+    background-image: url("~/src/assets/images/hero/img-hero.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 40px;
+  
+    @include media-tablet-small {
+      padding: 100px 60px;
+    }
+  
+    @include media-mobile-large {
+      padding: 60px 16px;
+    }
+  }
+  
+  .hero__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    max-width: 48%;
+  
+    @include media-tablet-large {
+      max-width: 70%;
+    }
+  
+    @include media-tablet-small {
+      max-width: 90%;
+    }
+  }
+  
+  .hero__title {
+    color: $color-text-light;
+  }
+  
+  .hero__description {
+    color: $color-text-light;
+    @include font(1.6rem, normal, 400, 2.4rem);
+  }
+  
+  .hero__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    @extend %transition;
+    width: 200px;
+  
+    &:hover {
+  
+      @include hover {
+        box-shadow: none;
+  
+        .icon_coffee {
+          visibility: visible;
+          opacity: 1;
+        }
+    
+        .buttton-text {
+          margin-left: 0;
+          margin-right: 8px;
+        }
+      }
+    }
+  
+    .icon_coffee {
+      transition: all 0.8s ease;
+      visibility: hidden;
+      opacity: 0;
+    }
+  
+    .buttton-text {
+      @extend %transition;
+      margin-left: 20px;
+    }
+  }
