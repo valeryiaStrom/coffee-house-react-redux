@@ -1,0 +1,110 @@
+.footer {
+  padding-top: 100px;
+}
+
+.footer__wrapper {
+  display: flex;
+  padding: 100px;
+  background-color: $color-bg-container;
+  border-radius: 40px;
+  gap: 100px;
+
+  @include media-tablet-small {
+    padding: 100px 60px;
+    flex-direction: column;
+  }
+
+  @include media-mobile-large {
+    padding: 60px 16px;
+  }
+}
+
+.footer__title {
+  color: $color-text-light;
+  margin-bottom: 40px;
+}
+
+.footer__social-links {
+  display: flex;
+  gap: 12px;
+}
+
+.footer__social-link {
+  width: 60px;
+  height: 60px;
+  border-radius: 100px;
+  border: 1px solid $color-border-light;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  @extend %transition;
+
+  &:hover {
+    @include hover {
+      background-color: $color-bg-body;
+
+      .icon_twitter {
+        background-image: url("~/src/assets/images/icons/twitter-hover.svg");
+      }
+
+      .icon_instagram {
+        background-image: url("~/src/assets/images/icons/instagram-hover.svg");
+      }
+
+      .icon_facebook {
+        background-image: url("~/src/assets/images/icons/facebook-hover.svg");
+      }
+    }
+  }
+}
+
+.footer__contacts-title {
+  color: $color-text-light;
+  margin-bottom: 40px;
+}
+
+.footer__contacts-links {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.footer__contacts-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: $color-text-light;
+  text-decoration: none;
+  font-weight: 600;
+  position: relative;
+  &:last-child {
+    cursor: default;
+    &::after {
+      display: none;
+    }
+  }
+  &:after {
+    position: absolute;
+    content: "";
+    height: 2px;
+    width: 100%;
+    bottom: -4px;
+    background-color: $color-text-light;
+    @extend %transition;
+    opacity: 0;
+  }
+  &:hover::after {
+    @include hover {
+      position: absolute;
+      content: "";
+      height: 2px;
+      width: 100%;
+      bottom: -4px;
+      background-color: $color-text-light;
+      opacity: 1;
+    }
+  }
+}

@@ -11,6 +11,7 @@ import Hero from "./components/hero/hero";
 import FavoriteCoffee from "./components/favorite-coffee/favorite-coffee";
 import About from "./components/about/about";
 import MobileApp from "./components/mobile-app/mobile-app";
+import Footer from "./components/footer/footer";
 
 import "./styles/app.scss";
 
@@ -33,6 +34,8 @@ export default function App() {
         <About />
         <MobileApp />
       </MainSection>
+
+      <Footer />
     </div>
   );
 }
