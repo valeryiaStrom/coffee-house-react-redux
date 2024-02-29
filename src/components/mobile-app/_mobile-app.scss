@@ -1,0 +1,94 @@
+.mobile-app__wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+
+  @include media-desktop-small {
+    gap: 0;
+  }
+
+  @include media-tablet-large {
+    flex-direction: column;
+    gap: 70px;
+  }
+}
+
+.mobile-app__content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.mobile-app__description {
+  color: $color-text-dark;
+}
+
+.mobile-app__buttons {
+  display: flex;
+  gap: 20px;
+
+  @include media-mobile-large {
+    flex-direction: column;
+  }
+}
+
+.mobile-app__button {
+  padding: 12px 20px;
+  border-radius: 100px;
+  border: 1px solid $color-border-dark;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  @extend %transition;
+
+  @include media-mobile-large {
+    max-width: 200px;
+  }
+
+  &:hover {
+    @include hover {
+      background-color: $color-bg-container;
+      color: $color-text-light;
+
+      .icon_app-store {
+        background-image: url("~/src/assets/images/icons/icon-app-store-hover.svg");
+      }
+
+      .icon_google-play {
+        background-image: url("~/src/assets/images/icons/icon-google-play-hover.svg");
+      }
+    }
+  }
+}
+
+.mobile-app__button-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+
+  &_top {
+    @include font(1rem, normal, 600, 1.4rem);
+  }
+}
+
+.mobile-app__image {
+  width: 630px;
+  height: 630px;
+
+  @include media-desktop-small {
+    width: 560px;
+    object-fit: contain;
+  }
+
+  @include media-tablet-large {
+    width: 630px;
+    height: 630px;
+  }
+
+  @include media-mobile-large {
+    width: 348px;
+    height: 348px;
+  }
+}

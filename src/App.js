@@ -10,6 +10,7 @@ import MainSection from "./components/main-section/main-section";
 import Hero from "./components/hero/hero";
 import FavoriteCoffee from "./components/favorite-coffee/favorite-coffee";
 import About from "./components/about/about";
+import MobileApp from "./components/mobile-app/mobile-app";
 
 import "./styles/app.scss";
 
@@ -28,8 +29,9 @@ export default function App() {
 
       <MainSection>
         <Hero />
-        <FavoriteCoffee/>
-        <About/>
+        <FavoriteCoffee />
+        <About />
+        <MobileApp />
       </MainSection>
     </div>
   );

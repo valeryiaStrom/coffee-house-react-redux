@@ -2,6 +2,15 @@ import React from "react";
 import Wrapper from "../../base/wrapper/wrapper";
 import LinkButton from "../../base/button/button";
 
+const HeroButtonContent = () => {
+  return (
+    <>
+      <span className="buttton-text">Menu</span>
+      <span className="icon icon_coffee"></span>
+    </>
+  );
+};
+
 const Hero = () => {
   return (
     <section className="hero" id="hero">
@@ -18,7 +27,12 @@ const Hero = () => {
             beverage.
           </p>
           <div className="hero__button-container">
-            <LinkButton cn="hero__button" href="./src/html/menu.html" text="Menu" />
+            <LinkButton
+              cn="hero__button"
+              href="./src/html/menu.html"
+              target="_self"
+              innerHtml=<HeroButtonContent />
+            ></LinkButton>
           </div>
         </div>
       </Wrapper>
