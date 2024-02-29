@@ -7,7 +7,10 @@ const About = () => {
       <Wrapper>
         <h2 className="about__title">
           Resource is
-          <span className="text-accented">the perfect and cozy place</span>{" "}
+          <span className="text-accented">
+            {" "}
+            the perfect and cozy place
+          </span>{" "}
           where you can enjoy a variety of hot beverages, relax, catch up with
           friends, or get some work done.
         </h2>
