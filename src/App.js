@@ -8,6 +8,7 @@ import BurgerButton from "./base/burger-button/burger-button";
 import MobileNavigation from "./components/mobile-navigation/mobile-navigation";
 import MainSection from "./components/main-section/main-section";
 import Hero from "./components/hero/hero";
+import FavoriteCoffee from "./components/favorite-coffee/favorite-coffee";
 
 import "./styles/app.scss";
 
@@ -26,6 +27,7 @@ export default function App() {
 
       <MainSection>
         <Hero />
+        <FavoriteCoffee/>
       </MainSection>
     </div>
   );

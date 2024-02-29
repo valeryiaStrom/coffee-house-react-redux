@@ -1,0 +1,152 @@
+.slider {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  
+  .slider__carousel {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  
+    @include media-tablet-small-2 {
+      justify-content: center;
+    }
+  }
+  
+  .slider__arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 100px;
+    border: 1px solid $color-border-dark;
+    cursor: pointer;
+    @extend %transition;
+    flex-shrink: 0;
+  
+    @include media-tablet-small-2 {
+      display: none;
+    }
+  
+    &:hover {
+      @include hover {
+        background-color: $color-bg-container;
+  
+        .slider__arrow-icon_left {
+          background-image: url("~/src/assets/images/icons/arrow-left-hover.svg");
+        }
+  
+        .slider__arrow-icon_right {
+          background-image: url("~/src/assets/images/icons/arrow-right-hover.svg");
+        }
+      }
+    }
+  }
+  
+  .slider__arrow-icon {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .slider__arrow-icon_left {
+    background-image: url("~/src/assets/images/icons/arrow-left.svg");
+  }
+  
+  .slider__arrow-icon_right {
+    background-image: url("~/src/assets/images/icons/arrow-right.svg");
+  }
+  
+  .slider__slides {
+    overflow: hidden;
+    flex-grow: 1;
+    display: flex;
+    margin: 0;
+  }
+  
+  .slide {
+    display: flex;
+    width: 100%;
+    flex-shrink: 0;
+    justify-content: center;
+    transition: all 1s linear;
+  }
+  
+  .slide__content {
+    display: flex;
+    max-width: 480px;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .slide__image {
+    width: 480px;
+    height: 480px;
+    @include media-mobile-large {
+      width: 348px;
+      height: 348px;
+    }
+  }
+  
+  .slide__text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .slider__controls {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .controls {
+    display: flex;
+    gap: 12px;
+  }
+  
+  .control {
+    display: flex;
+    width: 40px;
+    height: 4px;
+    border-radius: 100px;
+    @extend %transition;
+    background-color: $color-border-light;
+  
+    &_active {
+      .control__inner {
+        background-color: $color-border-dark;
+        animation-name: animate-control-inner-bg;
+        animation-duration: 5s;
+        animation-direction: normal;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+      }
+    }
+  
+    &:hover {
+      .control__inner {
+        animation-play-state: paused;
+      }
+    }
+  }
+  
+  .control__inner {
+    width: 100%;
+    height: 100%;
+  
+    &:hover {
+      animation-play-state: paused;
+    }
+  }
+  
+  @keyframes animate-control-inner-bg {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
