@@ -1,0 +1,26 @@
+@import "./base/normalize/normalize";
+
+// Abstracts
+@import "./abstracts/constants/constants";
+@import "./abstracts/placeholders/placeholders";
+@import "./abstracts/mixins/mixins";
+
+// Base
+@import "./base/base/base";
+@import "./base/logo/logo";
+@import "./base/wrapper/wrapper";
+@import "./base/icons/icons";
+@import "./base/burger-button/burger-button";
+@import "./base/button/button";
+
+// Components
+@import "./components/header/header";
+@import "./components/navigation/navigation";
+@import "./components//mobile-navigation/mobile-navigation";
+@import "./components/main-section/main-section";
+@import "./components/hero/hero";
+@import "./components/favorite-coffee/favorite-coffee";
+@import "./components/slider/slider";
+@import "./components/about/about";
+@import "./components/mobile-app/mobile-app";
+@import "./components/footer/footer";

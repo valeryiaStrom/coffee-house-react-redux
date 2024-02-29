@@ -13,7 +13,7 @@ import About from "./components/about/about";
 import MobileApp from "./components/mobile-app/mobile-app";
 import Footer from "./components/footer/footer";
 
-import "./styles/app.scss";
+import "./app.scss";
 
 export default function App() {
   return (
