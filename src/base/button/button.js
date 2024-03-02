@@ -1,9 +1,9 @@
 import React from "react";
 
-const LinkButton = ({ cn, href, target, innerHtml }) => {
+const LinkButton = ({ cn, href, target, children }) => {
   return (
-    <a href={href} className={`link-button ${cn}`} target={target}>
-      {innerHtml}
+    <a className={`link-button ${cn}`} href={href} target={target}>
+      {children}
     </a>
   );
 };

@@ -32,22 +32,24 @@ const MobileApp = () => {
               cn="mobile-app__button"
               href="https://www.apple.com/app-store/"
               target="_blank"
-              innerHtml=<MobileAppButtonContent
+            >
+              <MobileAppButtonContent
                 iconClassName="icon_app-store"
                 text="App Store"
                 topText="Available on the"
               />
-            ></LinkButton>
+            </LinkButton>
             <LinkButton
               cn="mobile-app__button"
               href="https://play.google.com/"
               target="_blank"
-              innerHtml=<MobileAppButtonContent
+            >
+              <MobileAppButtonContent
                 iconClassName="icon_google-play"
                 text="Google Play"
                 topText="Available on"
               />
-            ></LinkButton>
+            </LinkButton>
           </div>
         </div>
         <img
