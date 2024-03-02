@@ -1,10 +1,12 @@
 import React from "react";
+import MainSection from '../../components/main-section/main-section';
 
 const MenuPage = () => {
-    return (
-        <h2>This is menu page</h2>
-    )
-
-}
+  return (
+    <MainSection>
+      <h2>This is menu page</h2>
+    </MainSection>
+  );
+};
 
 export default MenuPage;

@@ -29,7 +29,7 @@ const Hero = () => {
           <div className='hero__button-container'>
             <LinkButton
               cn='hero__button'
-              href='./src/html/menu.html'
+              href='/src/pages/menu/menu.html'
               target='_self'
             >
               <HeroButtonContent />
