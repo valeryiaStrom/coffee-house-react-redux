@@ -1,25 +1,12 @@
 import React, { useState } from "react";
 import Wrapper from "../../base/wrapper/wrapper";
-import Tab from "../../base/tab/tab";
-import { prepareTabsData } from "../../utils/helpers/menu-tabs-helper";
 import Tabs from "../../base/tabs/tabs";
-import MenuItems from '../menu-items/menu-items';
-import MenuItem from "../menu-item/menu-item";
+import MenuItems from "../menu-items/menu-items";
 
-const createMenuItems = (productsData) => {
-  const menuItems = productsData.map((productData) => {
-    const menuItem = <MenuItem props={productData} key={productData.id} />;
-    return menuItem;
-  });
-
-  return menuItems;
-};
-
-const DEFAULT_SELECTED_TAB = 'coffee';
+const DEFAULT_SELECTED_TAB = "coffee";
 
 const Menu = ({ data }) => {
   const [selectedTab, setSelectedTab] = useState(DEFAULT_SELECTED_TAB);
-  const tabsData = prepareTabsData(data);
 
   return (
     <section className='menu' id='menu'>
@@ -29,22 +16,12 @@ const Menu = ({ data }) => {
           <span className='text-accented'>amazing surprise</span>
         </h2>
         <div className='menu__tabs-wrapper'>
-          <Tabs cn='menu__tabs'>
-            {tabsData.map((tabData, i) => {
-              const tab = (
-                <Tab
-                  key={i}
-                  category={tabData.category}
-                  isActive={selectedTab === tabData.category}
-                  tabText={tabData.label}
-                  iconCn={tabData.iconClassName}
-                  onClick={() => setSelectedTab(tabData.category)}
-                />
-              );
-
-              return tab;
-            })}
-          </Tabs>
+          <Tabs
+            cn={"menu__tabs"}
+            data={data}
+            selectedTab={selectedTab}
+            onTabClick={setSelectedTab}
+          />
         </div>
         <MenuItems data={data} selectedCategory={selectedTab}></MenuItems>
         <div className='menu__load-more-button menu__load-more-button_hidden'>
