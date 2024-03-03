@@ -1,0 +1,50 @@
+.menu__title {
+  text-align: center;
+  width: 62%;
+  margin: 0 auto 40px auto;
+}
+
+.menu__tabs-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.menu__tabs {
+  gap: 16px;
+
+  @include media-mobile-medium {
+    gap: 8px;
+  }
+}
+
+.menu__tabs.tabs {
+  flex-wrap: nowrap;
+}
+
+.menu__items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: center;
+}
+
+.menu__item {
+  flex-basis: 310px;
+  overflow: hidden;
+  height: 506px;
+
+  &_hidden {
+    display: none;
+  }
+}
+
+.menu__load-more-button {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+
+  &_hidden {
+    display: none;
+  }
+}

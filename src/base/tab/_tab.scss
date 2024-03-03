@@ -1,0 +1,55 @@
+.tab {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px 8px 8px;
+    border: 1px solid $color-border-light;
+    border-radius: 100px;
+    cursor: pointer;
+    @extend %transition;
+  
+    &_active {
+      background-color: $color-bg-container;
+      border: 1px solid $color-bg-container;
+      cursor: default;
+      .tab__icon {
+        background-color: $color-bg-body;
+      }
+      .tab__text {
+        color: $color-text-light;
+      }
+  
+      * {
+        cursor: default;
+      }
+    }
+  
+    &:hover {
+      @include hover {
+        background-color: $color-bg-container;
+        border: 1px solid $color-bg-container;
+        .tab__icon {
+          background-color: $color-bg-body;
+        }
+        .tab__text {
+          color: $color-text-light;
+        }
+      }
+    }
+  }
+  
+  .tab__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 100px;
+    background-color: $color-border-light;
+  }
+  
+  .tab__text {
+    font-weight: 600;
+    color: $color-text-dark;
+  }
