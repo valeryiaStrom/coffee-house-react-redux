@@ -3,6 +3,7 @@ import Wrapper from "../../base/wrapper/wrapper";
 import Tab from "../../base/tab/tab";
 import { prepareTabsData } from "../../utils/helpers/menu-tabs-helper";
 import Tabs from "../../base/tabs/tabs";
+import MenuItems from '../menu-items/menu-items';
 import MenuItem from "../menu-item/menu-item";
 
 const createMenuItems = (productsData) => {
@@ -19,7 +20,6 @@ const DEFAULT_SELECTED_TAB = 'coffee';
 const Menu = ({ data }) => {
   const [selectedTab, setSelectedTab] = useState(DEFAULT_SELECTED_TAB);
   const tabsData = prepareTabsData(data);
-  const menuItems = createMenuItems(data);
 
   return (
     <section className='menu' id='menu'>
@@ -46,7 +46,7 @@ const Menu = ({ data }) => {
             })}
           </Tabs>
         </div>
-        <div className='menu__items'>{menuItems}</div>
+        <MenuItems data={data} selectedCategory={selectedTab}></MenuItems>
         <div className='menu__load-more-button menu__load-more-button_hidden'>
           <button className='load-more-button'>
             <span className='icon icon-load-more'></span>
