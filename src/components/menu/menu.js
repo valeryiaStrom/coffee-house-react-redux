@@ -1,12 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Wrapper from "../../base/wrapper/wrapper";
 import Tabs from "../../base/tabs/tabs";
 import MenuItems from "../menu-items/menu-items";
+import { getClientWidth } from "../../utils/helpers/common-helper";
 
 const DEFAULT_SELECTED_TAB = "coffee";
+const initialClientWidth = getClientWidth();
 
 const Menu = ({ data }) => {
   const [selectedTab, setSelectedTab] = useState(DEFAULT_SELECTED_TAB);
+  const [clientWidth, setClientWidth] = useState(initialClientWidth);
+
+  useEffect(() => {
+    function handleResize() {
+      console.log("resizing");
+      setClientWidth(getClientWidth());
+    }
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <section className='menu' id='menu'>
@@ -23,7 +39,11 @@ const Menu = ({ data }) => {
             onTabClick={setSelectedTab}
           />
         </div>
-        <MenuItems data={data} selectedCategory={selectedTab}></MenuItems>
+        <MenuItems
+          data={data}
+          selectedCategory={selectedTab}
+          clientWidth={clientWidth}
+        ></MenuItems>
         <div className='menu__load-more-button menu__load-more-button_hidden'>
           <button className='load-more-button'>
             <span className='icon icon-load-more'></span>
