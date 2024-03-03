@@ -1,42 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import Wrapper from "../../base/wrapper/wrapper";
 import Tab from "../../base/tab/tab";
-import { products } from "../../data/products";
-import { getMenuCategories } from "../../utils/helpers/menu-tabs-helper";
-import { getMenuTabsLabels } from "../../utils/helpers/menu-tabs-helper";
+import { prepareTabsData } from "../../utils/helpers/menu-tabs-helper";
 import Tabs from "../../base/tabs/tabs";
+import MenuItem from "../menu-item/menu-item";
 
-const createMenuTabs = (products) => {
-  const menuCategories = getMenuCategories(products);
-  const menuTabsLabels = getMenuTabsLabels(menuCategories);
-  const menuTabsIconsClassNamesMap = new Map();
-  menuTabsIconsClassNamesMap.set("coffee", "icon_menu-tab-coffee");
-  menuTabsIconsClassNamesMap.set("tea", "icon_menu-tab-tea");
-  menuTabsIconsClassNamesMap.set("dessert", "icon_menu-tab-dessert");
-
-  const tabs = [];
-
-  menuCategories.forEach((category, i) => {
-    const isActive = i === 0;
-
-    const tab = (
-      <Tab
-        key={category}
-        dataId={category}
-        isActive={isActive}
-        tabText={menuTabsLabels[i]}
-        iconCn={menuTabsIconsClassNamesMap.get(category)}
-      />
-    );
-
-    tabs.push(tab);
+const createMenuItems = (productsData) => {
+  const menuItems = productsData.map((productData) => {
+    const menuItem = <MenuItem props={productData} key={productData.id} />;
+    return menuItem;
   });
 
-  return tabs;
+  return menuItems;
 };
 
-const Menu = () => {
-  const tabs = createMenuTabs(products);
+const DEFAULT_SELECTED_TAB = 'coffee';
+
+const Menu = ({ data }) => {
+  const [selectedTab, setSelectedTab] = useState(DEFAULT_SELECTED_TAB);
+  const tabsData = prepareTabsData(data);
+  const menuItems = createMenuItems(data);
 
   return (
     <section className='menu' id='menu'>
@@ -46,9 +29,24 @@ const Menu = () => {
           <span className='text-accented'>amazing surprise</span>
         </h2>
         <div className='menu__tabs-wrapper'>
-          <Tabs cn='menu__tabs' tabs={tabs} />
+          <Tabs cn='menu__tabs'>
+            {tabsData.map((tabData, i) => {
+              const tab = (
+                <Tab
+                  key={i}
+                  category={tabData.category}
+                  isActive={selectedTab === tabData.category}
+                  tabText={tabData.label}
+                  iconCn={tabData.iconClassName}
+                  onClick={() => setSelectedTab(tabData.category)}
+                />
+              );
+
+              return tab;
+            })}
+          </Tabs>
         </div>
-        <div className='menu__items'></div>
+        <div className='menu__items'>{menuItems}</div>
         <div className='menu__load-more-button menu__load-more-button_hidden'>
           <button className='load-more-button'>
             <span className='icon icon-load-more'></span>

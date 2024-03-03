@@ -1,12 +1,19 @@
 import React from "react";
 
-const Tab = ({ dataId, isActive = false, tabText, iconCn, iconText }) => {
-  const tabClassName = isActive ? 'tab tab_active' : 'tab';
-  const tabIconClassName = iconCn ? `icon ${iconCn}` : 'icon';
-  const tabIconText = iconText ? iconText : '';
+const Tab = ({
+  category,
+  isActive = false,
+  tabText,
+  iconCn,
+  iconText,
+  onClick,
+}) => {
+  const tabClassName = isActive ? "tab tab_active" : "tab";
+  const tabIconClassName = iconCn ? `icon ${iconCn}` : "icon";
+  const tabIconText = iconText ? iconText : "";
 
   return (
-    <div className={tabClassName} data-id={dataId}>
+    <div className={tabClassName} data-id={category} onClick={onClick}>
       <span className='tab__icon'>
         <span className={tabIconClassName}>{tabIconText}</span>
       </span>
