@@ -12,6 +12,11 @@ import MenuLoadMoreButton from "../menu-load-more-button/menu-load-more-button";
 import Tab from "../../base/tab/tab";
 import { prepareTabsData } from "../../utils/helpers/menu-tabs-helper";
 import MenuItem from "../menu-item/menu-item";
+import {
+  getDataItemById,
+  prepareProductData,
+} from "../../utils/helpers/menu-modal-helper";
+import MenuItemModal from "../menu-item-modal/menu-item-modal";
 
 const DEFAULT_SELECTED_TAB = "coffee";
 
@@ -19,10 +24,10 @@ const Menu = ({ data }) => {
   const [selectedTab, setSelectedTab] = useState(DEFAULT_SELECTED_TAB);
   const [clientWidth, setClientWidth] = useState(getClientWidth);
   const [loadMoreButtonClicked, setLoadMoreButtonClicked] = useState(false);
+  const [clickedMenuItemId, setClickedMenuItemId] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  useEffect(() => {
-
-  });
+  useEffect(() => {});
 
   useEffect(() => {
     const handleResize = () => {
@@ -75,12 +80,14 @@ const Menu = ({ data }) => {
 
     if (
       clientWidth <= TABLET_SMALL_WIDTH &&
-      menuItems.length > MAX_PRODUCTS_COUNT_TABLET && !loadMoreButtonClicked
+      menuItems.length > MAX_PRODUCTS_COUNT_TABLET &&
+      !loadMoreButtonClicked
     ) {
       menuItems.length = MAX_PRODUCTS_COUNT_TABLET;
-    } 
+    }
 
     console.log("the number of menu items should be: " + menuItems.length);
+    console.log("==========================");
     return menuItems;
   };
 
@@ -104,20 +111,48 @@ const Menu = ({ data }) => {
 
     if (
       menuItems.length > MAX_PRODUCTS_COUNT_TABLET &&
-      clientWidth <= TABLET_SMALL_WIDTH && !loadMoreButtonClicked
+      clientWidth <= TABLET_SMALL_WIDTH &&
+      !loadMoreButtonClicked
     ) {
       console.log("Load More Btn should be shown");
+      console.log("==========================");
       return true;
     }
 
     console.log("Load More Btn should NOT be shown");
+    console.log("==========================");
     return false;
   };
 
   const handleLoadMoreButtonClick = () => {
-    console.log('Load more button was clicked');
+    console.log("Load more button was clicked");
     setLoadMoreButtonClicked(true);
-  }
+  };
+
+  const createModalWindow = (data) => {
+    // get modal data by clicked menu item id
+    const productData = getDataItemById(data, clickedMenuItemId);
+
+    // prepare data for modal window
+    const preparedProductData = prepareProductData(productData);
+
+    // create modal
+    const modal = (
+      <MenuItemModal data={preparedProductData} isOpen={setIsModalOpen} />
+    );
+
+    return modal;
+  };
+
+  const handleMenuItemClick = (e) => {
+    if (e.target.closest(".menu__item")) {
+      console.log("menu item was clicked");
+      const clickedMenuItem = e.target.closest(".menu__item");
+      const clickedMenuItemId = clickedMenuItem.getAttribute("data-id");
+      setClickedMenuItemId(clickedMenuItemId);
+      setIsModalOpen(true);
+    }
+  };
 
   const tabs = createTabs(data);
   const menuItems = createMenuItems(data);
@@ -133,11 +168,12 @@ const Menu = ({ data }) => {
         <div className='menu__tabs-wrapper'>
           <Tabs cn={"menu__tabs"}>{tabs}</Tabs>
         </div>
-        <MenuItems>{menuItems}</MenuItems>
+        <MenuItems onClick={handleMenuItemClick}>{menuItems}</MenuItems>
         <MenuLoadMoreButton showButton={showLoadMoreButton}>
-          <LoadMoreButton onButtonClick={handleLoadMoreButtonClick}/>
+          <LoadMoreButton onButtonClick={handleLoadMoreButtonClick} />
         </MenuLoadMoreButton>
       </Wrapper>
+      {isModalOpen && createModalWindow(data)}
     </section>
   );
 };

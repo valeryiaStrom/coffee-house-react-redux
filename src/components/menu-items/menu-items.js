@@ -29,8 +29,8 @@ import {
 //   return <div className='menu__items'>{menuItems}</div>;
 // };
 
-const MenuItems = ({ children }) => {
-  return <div className='menu__items'>{children}</div>;
+const MenuItems = ({ children, onClick }) => {
+  return <div className='menu__items' onClick={onClick}>{children}</div>;
 };
 
 export default MenuItems;
