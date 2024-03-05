@@ -27,16 +27,21 @@ const MenuItemModal = ({ data, isOpen }) => {
           <div className='modal__sizes'>
             <span className='modal__sizes-label'>Size</span>
             <div className='modal__sizes-tabs tabs'>
-              {/* sizes.forEach((sizeData, i) => {
-      <div className="${
-        i === 0 ? "tab tab_active" : "tab"
-      }" data-addprice="${sizeData["add-price"]}">
-      <span className="tab__icon"
-      <span className="icon">${sizeData.label}</span>
-      </span>
-      <span className="tab__text">${sizeData.size}</span>
-      </div>
-    }); */}
+              {sizes.map((sizeData, i) => {
+                return (
+                  <>
+                    <div
+                      className={i === 0 ? "tab tab_active" : "tab"}
+                      data-addprice={sizeData["add-price"]}
+                    >
+                      <span className='tab__icon'>
+                        <span className='icon'>{sizeData.label}</span>
+                      </span>
+                      <span className='tab__text'>{sizeData.size}</span>
+                    </div>
+                  </>
+                );
+              })}
             </div>
           </div>
 
@@ -44,14 +49,21 @@ const MenuItemModal = ({ data, isOpen }) => {
             <span className='modal__additivies-label'>Additives</span>
 
             <div className='modal__additivies-tabs tabs'>
-              {/* additives.forEach((additiveData, i) => {
-      <div className="tab" data-addprice="${additiveData["add-price"]}">
-      <span className="tab__icon">
-      <span className="icon">${i + 1}</span>
-      </span>
-      <span className="tab__text">${additiveData.name}</span>
-      </div>
-    }); */}
+              {additives.map((additiveData, i) => {
+                return (
+                  <>
+                    <div
+                      className='tab'
+                      data-addprice={additiveData["add-price"]}
+                    >
+                      <span className='tab__icon'>
+                        <span className='icon'>{i + 1}</span>
+                      </span>
+                      <span className='tab__text'>{additiveData.name}</span>
+                    </div>
+                  </>
+                );
+              })}
             </div>
           </div>
 
