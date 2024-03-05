@@ -18,6 +18,11 @@ const DEFAULT_SELECTED_TAB = "coffee";
 const Menu = ({ data }) => {
   const [selectedTab, setSelectedTab] = useState(DEFAULT_SELECTED_TAB);
   const [clientWidth, setClientWidth] = useState(getClientWidth);
+  const [loadMoreButtonClicked, setLoadMoreButtonClicked] = useState(false);
+
+  useEffect(() => {
+
+  });
 
   useEffect(() => {
     const handleResize = () => {
@@ -47,6 +52,7 @@ const Menu = ({ data }) => {
           iconCn={tab.iconClassName}
           onClick={(e) => {
             setSelectedTab(e.target.closest(".tab").getAttribute("data-id"));
+            setLoadMoreButtonClicked(false);
           }}
         />
       );
@@ -69,10 +75,10 @@ const Menu = ({ data }) => {
 
     if (
       clientWidth <= TABLET_SMALL_WIDTH &&
-      menuItems.length > MAX_PRODUCTS_COUNT_TABLET
+      menuItems.length > MAX_PRODUCTS_COUNT_TABLET && !loadMoreButtonClicked
     ) {
       menuItems.length = MAX_PRODUCTS_COUNT_TABLET;
-    }
+    } 
 
     console.log("the number of menu items should be: " + menuItems.length);
     return menuItems;
@@ -98,7 +104,7 @@ const Menu = ({ data }) => {
 
     if (
       menuItems.length > MAX_PRODUCTS_COUNT_TABLET &&
-      clientWidth <= TABLET_SMALL_WIDTH
+      clientWidth <= TABLET_SMALL_WIDTH && !loadMoreButtonClicked
     ) {
       console.log("Load More Btn should be shown");
       return true;
@@ -107,6 +113,11 @@ const Menu = ({ data }) => {
     console.log("Load More Btn should NOT be shown");
     return false;
   };
+
+  const handleLoadMoreButtonClick = () => {
+    console.log('Load more button was clicked');
+    setLoadMoreButtonClicked(true);
+  }
 
   const tabs = createTabs(data);
   const menuItems = createMenuItems(data);
@@ -124,7 +135,7 @@ const Menu = ({ data }) => {
         </div>
         <MenuItems>{menuItems}</MenuItems>
         <MenuLoadMoreButton showButton={showLoadMoreButton}>
-          <LoadMoreButton />
+          <LoadMoreButton onButtonClick={handleLoadMoreButtonClick}/>
         </MenuLoadMoreButton>
       </Wrapper>
     </section>
