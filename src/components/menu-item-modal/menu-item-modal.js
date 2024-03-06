@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
 const MenuItemModal = ({ data, isOpen }) => {
-  const { id, imageSrc, name, description, currency, sizes, additives } = data;
-
   const [selectedSizeId, setSelectedSizeId] = useState(0);
   const [selectedAdditivesIds, setSelectedAdditivesIds] = useState([]);
+
+  const { id, imageSrc, name, description, currency, sizes, additives } = data;
 
   const handleSizeClick = (e) => {
     if (e.target.closest(".tab")) {
