@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const MenuItemModal = ({ data, isOpen }) => {
-  const { id, imageSrc, name, description, price, currency, sizes, additives } =
+  const { id, imageSrc, name, description, currency, sizes, additives } =
     data;
 
   const [selectedSizeId, setSelectedSizeId] = useState(0);
@@ -10,7 +10,7 @@ const MenuItemModal = ({ data, isOpen }) => {
   const handleSizeClick = (e) => {
     if (e.target.closest(".tab")) {
       const clickedTab = e.target.closest(".tab");
-      const clickedTabId = Number(clickedTab.getAttribute("data-id"));
+      const clickedTabId = parseFloat(clickedTab.getAttribute("data-id"));
       if (selectedSizeId !== clickedTabId) {
         setSelectedSizeId(clickedTabId);
       }
@@ -20,7 +20,7 @@ const MenuItemModal = ({ data, isOpen }) => {
   const handleAdditiveClick = (e) => {
     if (e.target.closest(".tab")) {
       const clickedTab = e.target.closest(".tab");
-      const clickedTabId = Number(clickedTab.getAttribute("data-id"));
+      const clickedTabId = parseFloat(clickedTab.getAttribute("data-id"));
       const isAlreadySelected = selectedAdditivesIds.includes(clickedTabId);
 
       if (isAlreadySelected) {
@@ -33,6 +33,44 @@ const MenuItemModal = ({ data, isOpen }) => {
       }
     }
   };
+
+  const getTotalPrice = (data) => {
+    const { price, sizes, additives } = data;
+    const initialPrice = parseFloat(price);
+
+    const selectedSizeData = sizes.find(({ id }) => id === selectedSizeId);
+    const selectedSizeAddPrice = parseFloat(selectedSizeData["add-price"]);
+
+    let totalSelectedAdditivesAddPrice = 0;
+
+    if (selectedAdditivesIds.length) {
+      const selectedAdditivesData = additives.filter((additive) => {
+        return selectedAdditivesIds.includes(additive.id);
+      });
+
+      const selectedAdditivesAddPrices = selectedAdditivesData.map((additive) =>
+        parseFloat(additive["add-price"])
+      );
+      selectedAdditivesAddPrices.forEach((price) => console.log(typeof price));
+
+      totalSelectedAdditivesAddPrice = selectedAdditivesAddPrices.reduce(
+        (sum, value) => sum + value,
+        0
+      );
+    }
+
+    const totalPrice =
+      initialPrice + selectedSizeAddPrice + totalSelectedAdditivesAddPrice;
+
+    return totalPrice;
+  };
+
+  const formatPrice = (price) => {
+    return price.toFixed(2);
+  };
+
+  const totalPrice = getTotalPrice(data);
+  const totalPriceFormatted = formatPrice(totalPrice);
 
   return (
     <div
@@ -116,7 +154,7 @@ const MenuItemModal = ({ data, isOpen }) => {
             <span className='modal__total-label'>Total:</span>
             <h3 className='modal__total-price'>
               {currency}
-              {price}
+              {totalPriceFormatted}
             </h3>
           </div>
 
@@ -126,9 +164,7 @@ const MenuItemModal = ({ data, isOpen }) => {
               data='/src/assets/images/icons/modal-icon-alert.svg'
               width='16'
               height='16'
-            >
-              {" "}
-            </object>
+            ></object>
             <span className='modal__alert-text'>
               The cost is not final. Download our mobile app to see the final
               price and place your order. Earn loyalty points and enjoy your
