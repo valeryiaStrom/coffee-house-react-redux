@@ -11,11 +11,11 @@ import Footer from "./components/footer/footer";
 import HomePage from "./pages/home/home-page";
 import MenuPage from "./pages/menu/menu-page";
 import MainSection from "./components/main-section/main-section";
-import { products } from './data/products';
+import { products } from "./data/products";
 
 export default function App() {
   return (
-    <div className='App'>
+    <div>
       <Header>
         <Wrapper cn='header__wrapper'>
           <Logo></Logo>
@@ -29,7 +29,10 @@ export default function App() {
       <MainSection>
         <Routes>
           <Route path='/' element={<HomePage />} />
-          <Route path='/src/pages/menu/menu.html' element={<MenuPage data={products}/>} />
+          <Route
+            path='/src/pages/menu/menu.html'
+            element={<MenuPage data={products} />}
+          />
         </Routes>
       </MainSection>
 

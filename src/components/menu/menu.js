@@ -42,8 +42,10 @@ const Menu = ({ data }) => {
 
   useEffect(() => {
     if (isModalOpen) {
+      document.querySelector(".header").classList.remove("header_sticky");
       document.body.classList.add("body_unscrollable");
     } else {
+      document.querySelector(".header").classList.add("header_sticky");
       document.body.classList.remove("body_unscrollable");
     }
   }, [isModalOpen]);
