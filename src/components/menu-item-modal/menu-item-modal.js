@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 
 const MenuItemModal = ({ data, isOpen }) => {
-  const { id, imageSrc, name, description, currency, sizes, additives } =
-    data;
+  const { id, imageSrc, name, description, currency, sizes, additives } = data;
 
   const [selectedSizeId, setSelectedSizeId] = useState(0);
   const [selectedAdditivesIds, setSelectedAdditivesIds] = useState([]);
@@ -97,23 +96,19 @@ const MenuItemModal = ({ data, isOpen }) => {
             <div className='modal__sizes-tabs tabs' onClick={handleSizeClick}>
               {sizes.map((sizeData) => {
                 return (
-                  <>
-                    <div
-                      key={sizeData.id}
-                      className={
-                        selectedSizeId === sizeData.id
-                          ? "tab tab_active"
-                          : "tab"
-                      }
-                      data-id={sizeData.id}
-                      data-addprice={sizeData["add-price"]}
-                    >
-                      <span className='tab__icon'>
-                        <span className='icon'>{sizeData.label}</span>
-                      </span>
-                      <span className='tab__text'>{sizeData.size}</span>
-                    </div>
-                  </>
+                  <div
+                    key={sizeData.id}
+                    className={
+                      selectedSizeId === sizeData.id ? "tab tab_active" : "tab"
+                    }
+                    data-id={sizeData.id}
+                    data-addprice={sizeData["add-price"]}
+                  >
+                    <span className='tab__icon'>
+                      <span className='icon'>{sizeData.label}</span>
+                    </span>
+                    <span className='tab__text'>{sizeData.size}</span>
+                  </div>
                 );
               })}
             </div>
@@ -128,23 +123,21 @@ const MenuItemModal = ({ data, isOpen }) => {
             >
               {additives.map((additiveData, i) => {
                 return (
-                  <>
-                    <div
-                      key={additiveData.id}
-                      className={
-                        selectedAdditivesIds.includes(additiveData.id)
-                          ? "tab tab_active"
-                          : "tab"
-                      }
-                      data-id={additiveData.id}
-                      data-addprice={additiveData["add-price"]}
-                    >
-                      <span className='tab__icon'>
-                        <span className='icon'>{i + 1}</span>
-                      </span>
-                      <span className='tab__text'>{additiveData.name}</span>
-                    </div>
-                  </>
+                  <div
+                    key={additiveData.id}
+                    className={
+                      selectedAdditivesIds.includes(additiveData.id)
+                        ? "tab tab_active"
+                        : "tab"
+                    }
+                    data-id={additiveData.id}
+                    data-addprice={additiveData["add-price"]}
+                  >
+                    <span className='tab__icon'>
+                      <span className='icon'>{i + 1}</span>
+                    </span>
+                    <span className='tab__text'>{additiveData.name}</span>
+                  </div>
                 );
               })}
             </div>
