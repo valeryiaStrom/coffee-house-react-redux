@@ -1,8 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 
 const MenuItemModal = ({ data, isOpen }) => {
   const { id, imageSrc, name, description, price, currency, sizes, additives } =
     data;
+
+  const [selectedSizeId, setSelectedSizeId] = useState(0);
+  const [selectedAdditivesIds, setSelectedAdditivesIds] = useState([]);
+
+  const handleSizeClick = (e) => {
+    if (e.target.closest(".tab")) {
+      const clickedTab = e.target.closest(".tab");
+      const clickedTabId = Number(clickedTab.getAttribute("data-id"));
+      if (selectedSizeId !== clickedTabId) {
+        setSelectedSizeId(clickedTabId);
+      }
+    }
+  };
+
+  const handleAdditiveClick = (e) => {
+    if (e.target.closest(".tab")) {
+      const clickedTab = e.target.closest(".tab");
+      const clickedTabId = Number(clickedTab.getAttribute("data-id"));
+      const isAlreadySelected = selectedAdditivesIds.includes(clickedTabId);
+
+      if (isAlreadySelected) {
+        const newSelectedAdditives = selectedAdditivesIds.filter(
+          (id) => id !== clickedTabId
+        );
+        setSelectedAdditivesIds(newSelectedAdditives);
+      } else {
+        setSelectedAdditivesIds([...selectedAdditivesIds, clickedTabId]);
+      }
+    }
+  };
 
   return (
     <div
@@ -26,12 +56,18 @@ const MenuItemModal = ({ data, isOpen }) => {
 
           <div className='modal__sizes'>
             <span className='modal__sizes-label'>Size</span>
-            <div className='modal__sizes-tabs tabs'>
-              {sizes.map((sizeData, i) => {
+            <div className='modal__sizes-tabs tabs' onClick={handleSizeClick}>
+              {sizes.map((sizeData) => {
                 return (
                   <>
                     <div
-                      className={i === 0 ? "tab tab_active" : "tab"}
+                      key={sizeData.id}
+                      className={
+                        selectedSizeId === sizeData.id
+                          ? "tab tab_active"
+                          : "tab"
+                      }
+                      data-id={sizeData.id}
                       data-addprice={sizeData["add-price"]}
                     >
                       <span className='tab__icon'>
@@ -48,12 +84,21 @@ const MenuItemModal = ({ data, isOpen }) => {
           <div className='modal__additivies'>
             <span className='modal__additivies-label'>Additives</span>
 
-            <div className='modal__additivies-tabs tabs'>
+            <div
+              className='modal__additivies-tabs tabs'
+              onClick={handleAdditiveClick}
+            >
               {additives.map((additiveData, i) => {
                 return (
                   <>
                     <div
-                      className='tab'
+                      key={additiveData.id}
+                      className={
+                        selectedAdditivesIds.includes(additiveData.id)
+                          ? "tab tab_active"
+                          : "tab"
+                      }
+                      data-id={additiveData.id}
                       data-addprice={additiveData["add-price"]}
                     >
                       <span className='tab__icon'>
