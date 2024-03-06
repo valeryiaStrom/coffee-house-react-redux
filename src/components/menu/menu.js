@@ -27,8 +27,6 @@ const Menu = ({ data }) => {
   const [clickedMenuItemId, setClickedMenuItemId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  useEffect(() => {});
-
   useEffect(() => {
     const handleResize = () => {
       const clientWidth = getClientWidth();
@@ -41,6 +39,14 @@ const Menu = ({ data }) => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.classList.add("body_unscrollable");
+    } else {
+      document.body.classList.remove("body_unscrollable");
+    }
+  }, [isModalOpen]);
 
   const createTabs = (data) => {
     const tabsData = prepareTabsData(data);

@@ -50,7 +50,6 @@ const MenuItemModal = ({ data, isOpen }) => {
       const selectedAdditivesAddPrices = selectedAdditivesData.map((additive) =>
         parseFloat(additive["add-price"])
       );
-      selectedAdditivesAddPrices.forEach((price) => console.log(typeof price));
 
       totalSelectedAdditivesAddPrice = selectedAdditivesAddPrices.reduce(
         (sum, value) => sum + value,

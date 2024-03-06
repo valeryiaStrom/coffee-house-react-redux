@@ -10,6 +10,8 @@ import MobileNavigation from "./components/mobile-navigation/mobile-navigation";
 import Footer from "./components/footer/footer";
 import HomePage from "./pages/home/home-page";
 import MenuPage from "./pages/menu/menu-page";
+import MainSection from "./components/main-section/main-section";
+import { products } from './data/products';
 
 export default function App() {
   return (
@@ -24,10 +26,12 @@ export default function App() {
       </Header>
       <MobileNavigation />
 
-      <Routes>
-        <Route path='/' element={<HomePage />} />
-        <Route path='/src/pages/menu/menu.html' element={<MenuPage />} />
-      </Routes>
+      <MainSection>
+        <Routes>
+          <Route path='/' element={<HomePage />} />
+          <Route path='/src/pages/menu/menu.html' element={<MenuPage data={products}/>} />
+        </Routes>
+      </MainSection>
 
       <Footer />
     </div>
