@@ -31,7 +31,6 @@ const Menu = ({ data }) => {
 
   useEffect(() => {
     const handleResize = () => {
-      console.log("resizing");
       const clientWidth = getClientWidth();
       setClientWidth(clientWidth);
     };
@@ -67,16 +66,12 @@ const Menu = ({ data }) => {
   };
 
   const createMenuItems = (data) => {
-    console.log("creating menu items");
     const menuItems = [];
     data.forEach((item, i) => {
       if (item.category === selectedTab) {
         menuItems.push(<MenuItem props={item} key={i} />);
       }
     });
-    console.log(
-      "when creating menu items clientw width was: " + clientWidth + "px"
-    );
 
     if (
       clientWidth <= TABLET_SMALL_WIDTH &&
@@ -86,8 +81,6 @@ const Menu = ({ data }) => {
       menuItems.length = MAX_PRODUCTS_COUNT_TABLET;
     }
 
-    console.log("the number of menu items should be: " + menuItems.length);
-    console.log("==========================");
     return menuItems;
   };
 
@@ -99,33 +92,18 @@ const Menu = ({ data }) => {
       }
     });
 
-    console.log(
-      "when deciding whether Load More Btn should be shown, client width was: " +
-        clientWidth +
-        "px"
-    );
-    console.log(
-      "when deciding whether Load More Btn should be shown, the intended number of menu items was : " +
-        menuItems.length
-    );
-
     if (
       menuItems.length > MAX_PRODUCTS_COUNT_TABLET &&
       clientWidth <= TABLET_SMALL_WIDTH &&
       !loadMoreButtonClicked
     ) {
-      console.log("Load More Btn should be shown");
-      console.log("==========================");
       return true;
     }
 
-    console.log("Load More Btn should NOT be shown");
-    console.log("==========================");
     return false;
   };
 
   const handleLoadMoreButtonClick = () => {
-    console.log("Load more button was clicked");
     setLoadMoreButtonClicked(true);
   };
 
@@ -146,7 +124,6 @@ const Menu = ({ data }) => {
 
   const handleMenuItemClick = (e) => {
     if (e.target.closest(".menu__item")) {
-      console.log("menu item was clicked");
       const clickedMenuItem = e.target.closest(".menu__item");
       const clickedMenuItemId = clickedMenuItem.getAttribute("data-id");
       setClickedMenuItemId(clickedMenuItemId);
