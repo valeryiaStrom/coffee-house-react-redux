@@ -24,7 +24,6 @@ const Slider = ({ data }) => {
   const handleConrolsAnimationInteractionEnd = (e) => {
     // switch slides to the right
     const next = getNextActiveControlIndex(activeControlIndex, "rtl");
-    console.log("next active control index after autoplay: " + next);
     setActiveControlIndex(next);
   };
 
