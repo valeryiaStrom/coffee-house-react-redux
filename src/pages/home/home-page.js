@@ -4,11 +4,11 @@ import FavoriteCoffee from "../../components/favorite-coffee/favorite-coffee";
 import About from "../../components/about/about";
 import MobileApp from "../../components/mobile-app/mobile-app";
 
-const HomePage = () => {
+const HomePage = ({data}) => {
   return (
     <>
       <Hero />
-      <FavoriteCoffee />
+      <FavoriteCoffee data={data}/>
       <About />
       <MobileApp />
     </>

@@ -2,7 +2,7 @@ import React from "react";
 import Wrapper from "../../base/wrapper/wrapper";
 import Slider from "../slider/slider";
 
-const FavoriteCoffee = () => {
+const FavoriteCoffee = ({data}) => {
   return (
     <section className="favorite-coffee" id="favorite-coffee">
       <Wrapper cn="favorite-coffee__wrapper">
@@ -10,7 +10,7 @@ const FavoriteCoffee = () => {
           Choose your <span className="text-accented">favorite</span> coffee
         </h2>
 
-        <Slider/>
+        <Slider data={data}/>
 
       </Wrapper>
     </section>
