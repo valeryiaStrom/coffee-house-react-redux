@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 const INITIAL_ACTIVE_CONTROL_INDEX = 0;
 
 const Slider = ({ data }) => {
@@ -6,6 +6,27 @@ const Slider = ({ data }) => {
     INITIAL_ACTIVE_CONTROL_INDEX
   );
   const controlsRef = useRef();
+
+  useEffect(() => {
+    controlsRef.current.addEventListener(
+      "animationiteration",
+      handleConrolsAnimationInteractionEnd
+    );
+
+    return () => {
+      controlsRef.current.removeEventListener(
+        "animationiteration",
+        handleConrolsAnimationInteractionEnd
+      );
+    };
+  });
+
+  const handleConrolsAnimationInteractionEnd = (e) => {
+    // switch slides to the right
+    const next = getNextActiveControlIndex(activeControlIndex, "rtl");
+    console.log("next active control index after autoplay: " + next);
+    setActiveControlIndex(next);
+  };
 
   const handleLeftArrowBtnClick = (e) => {
     console.log("left");
