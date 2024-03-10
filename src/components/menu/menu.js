@@ -54,23 +54,28 @@ const Menu = ({ data }) => {
     const tabsData = prepareTabsData(data);
     const tabs = [];
 
-    tabsData.forEach((tab, i) => {
+    tabsData.forEach((tab) => {
       tabs.push(
         <Tab
-          key={i}
+          key={tab.category}
           category={tab.category}
           isActive={selectedTab === tab.category}
           tabText={tab.label}
           iconCn={tab.iconClassName}
-          onClick={(e) => {
-            setSelectedTab(e.target.closest(".tab").getAttribute("data-id"));
-            setLoadMoreButtonClicked(false);
-          }}
         />
       );
     });
 
     return tabs;
+  };
+
+  const handleMenuTabClick = (e) => {
+    if (e.target.closest(".tab")) {
+      const clickedTab = e.target.closest(".tab");
+      const clickedTabId = clickedTab.getAttribute("data-id");
+      setSelectedTab(clickedTabId);
+      setLoadMoreButtonClicked(false);
+    }
   };
 
   const createMenuItems = (data) => {
@@ -151,7 +156,9 @@ const Menu = ({ data }) => {
           <span className='text-accented'> amazing surprise</span>
         </h2>
         <div className='menu__tabs-wrapper'>
-          <Tabs cn={"menu__tabs"}>{tabs}</Tabs>
+          <Tabs cn={"menu__tabs"} onTabClick={handleMenuTabClick}>
+            {tabs}
+          </Tabs>
         </div>
         <MenuItems onClick={handleMenuItemClick}>{menuItems}</MenuItems>
         <MenuLoadMoreButton showButton={showLoadMoreButton}>

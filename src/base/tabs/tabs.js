@@ -23,8 +23,8 @@ import Tab from "../tab/tab";
 //   return <div className={`tabs ${cn}`}>{tabs}</div>;
 // };
 
-const Tabs = ({ cn, children}) => {
-  return <div className={`tabs ${cn}`}>{children}</div>;
+const Tabs = ({ cn, onTabClick, children}) => {
+  return <div className={`tabs ${cn}`} onClick={onTabClick}>{children}</div>;
 };
 
 export default Tabs;
