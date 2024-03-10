@@ -1,7 +1,7 @@
 import React from "react";
 
 const Tab = ({
-  category,
+  id,
   isActive = false,
   tabText,
   iconCn,
@@ -13,7 +13,7 @@ const Tab = ({
   const tabIconText = iconText ? iconText : "";
 
   return (
-    <div className={tabClassName} data-id={category} onClick={onClick}>
+    <div className={tabClassName} data-id={id} onClick={onClick}>
       <span className='tab__icon'>
         <span className={tabIconClassName}>{tabIconText}</span>
       </span>

@@ -58,7 +58,7 @@ const Menu = ({ data }) => {
       tabs.push(
         <Tab
           key={tab.category}
-          category={tab.category}
+          id={tab.category}
           isActive={selectedTab === tab.category}
           tabText={tab.label}
           iconCn={tab.iconClassName}
