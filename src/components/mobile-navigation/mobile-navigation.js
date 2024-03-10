@@ -2,12 +2,14 @@ import React from "react";
 
 const MobileNavigation = ({
   isShown,
+  offsetTop,
   isMenuLinkActive,
   onNavigationLinksClick,
   onMenuLinkClick,
 }) => {
   return (
     <nav
+      style={{ top: `${offsetTop - 1}px` }}
       className={
         isShown
           ? "mobile-navigation"

@@ -1,7 +1,11 @@
-import React from "react";
+import React, { forwardRef } from "react";
 
-const Header = ({ children }) => {
-  return <header className="header header_sticky">{children}</header>;
-};
+const Header = forwardRef((props, ref) => {
+  return (
+    <header className='header header_sticky' ref={ref}>
+      {props.children}
+    </header>
+  );
+});
 
 export default Header;

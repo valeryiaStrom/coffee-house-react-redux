@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Header from "../header/header";
 import Navigation from "../navigation/navigation";
 import Wrapper from "../../base/wrapper/wrapper";
@@ -13,12 +13,22 @@ const isMenuPage = window.location.href.includes("menu");
 const HeaderBlock = () => {
   const [showMobileNavigation, setShowMobileNavigation] = useState(false);
   const [isMenuLinkActive, setIsMenuLinkActive] = useState(isMenuPage);
+  const [headerHeight, setHeaderHeight] = useState();
+
+  const headerRef = useRef(null);
 
   useEffect(() => {
     if (showMobileNavigation) {
       document.body.classList.add("body_unscrollable");
     } else {
       document.body.classList.remove("body_unscrollable");
+    }
+  }, [showMobileNavigation]);
+
+  useEffect(() => {
+    if (showMobileNavigation) {
+      const headerHeight = headerRef.current.offsetHeight;
+      setHeaderHeight(headerHeight);
     }
   }, [showMobileNavigation]);
 
@@ -52,7 +62,7 @@ const HeaderBlock = () => {
 
   return (
     <>
-      <Header>
+      <Header ref={headerRef}>
         <Wrapper cn='header__wrapper'>
           <Logo></Logo>
           <Navigation />
@@ -69,6 +79,7 @@ const HeaderBlock = () => {
       </Header>
       <MobileNavigation
         isShown={showMobileNavigation}
+        offsetTop={headerHeight}
         isMenuLinkActive={isMenuLinkActive}
         onNavigationLinksClick={handleNavigationLinksClick}
         onMenuLinkClick={handleMenuLinkClick}
