@@ -148,7 +148,7 @@ const Menu = ({ data }) => {
       <Wrapper cn='menu__wrapper'>
         <h2 className='menu__title'>
           Behind each of our cups hides an
-          <span className='text-accented'>amazing surprise</span>
+          <span className='text-accented'> amazing surprise</span>
         </h2>
         <div className='menu__tabs-wrapper'>
           <Tabs cn={"menu__tabs"}>{tabs}</Tabs>
