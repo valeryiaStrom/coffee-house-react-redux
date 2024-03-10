@@ -16,6 +16,7 @@ export default function App() {
       <MainSection>
         <Routes>
           <Route path='/' element={<HomePage data={slides} />} />
+          <Route path='/index.html' element={<HomePage data={slides} />} />
           <Route
             path='/src/pages/menu/menu.html'
             element={<MenuPage data={products} />}
