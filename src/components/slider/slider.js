@@ -5,7 +5,10 @@ const Slider = ({ data }) => {
   const [activeControlIndex, setActiveControlIndex] = useState(
     INITIAL_ACTIVE_CONTROL_INDEX
   );
+  const [touch, setTouch] = useState({ startX: null, startY: null });
+
   const controlsRef = useRef();
+  const carouselRef = useRef();
 
   useEffect(() => {
     controlsRef.current.addEventListener(
@@ -18,6 +21,22 @@ const Slider = ({ data }) => {
         "animationiteration",
         handleConrolsAnimationInteractionEnd
       );
+    };
+  });
+
+  useEffect(() => {
+    carouselRef.current.addEventListener("touchstart", handleTouchStart);
+
+    carouselRef.current.addEventListener("touchmove", handleTouchMove);
+
+    carouselRef.current.addEventListener("touchend", handleTouchEnd);
+
+    return () => {
+      carouselRef.current.removeEventListener("touchstart", handleTouchStart);
+
+      carouselRef.current.removeEventListener("touchmove", handleTouchMove);
+
+      carouselRef.current.removeEventListener("touchend", handleTouchEnd);
     };
   });
 
@@ -41,6 +60,48 @@ const Slider = ({ data }) => {
     setActiveControlIndex(next);
   };
 
+  const handleTouchStart = (e) => {
+    const firstTouch = e.touches[0];
+    setTouch({ startX: firstTouch.clientX, startY: firstTouch.clientY });
+  };
+
+  const handleTouchMove = (e) => {
+    e.preventDefault();
+    // if coords didn't change, then swipe didn't happen
+    if (touch.startX === null || touch.startY === null) {
+      return;
+    }
+
+    const moveX = e.touches[0].clientX;
+    const moveY = e.touches[0].clientY;
+
+    // find the difference
+    const xDiff = moveX - touch.startX;
+    const yDiff = moveY - touch.startY;
+
+    // check what changed more: x coords or y coords
+    if (Math.abs(xDiff) > Math.abs(yDiff)) {
+      // swipe right or left
+      let next;
+      if (xDiff > 0) {
+        // swipe right
+        next = getNextActiveControlIndex(activeControlIndex, "ltr");
+      } else {
+        // swipe left
+        next = getNextActiveControlIndex(activeControlIndex, "rtl");
+      }
+      setActiveControlIndex(next);
+    }
+  };
+
+  const handleTouchEnd = (e) => {
+    clearTouches();
+  };
+
+  const clearTouches = () => {
+    setTouch({ startX: null, startY: null });
+  };
+
   const getNextActiveControlIndex = (currentActiveControlIndex, direction) => {
     let nextActiveControlIndex;
     if (direction === "ltr") {
@@ -62,7 +123,7 @@ const Slider = ({ data }) => {
 
   return (
     <div className='slider'>
-      <div className='slider__carousel'>
+      <div className='slider__carousel' ref={carouselRef}>
         <span
           className='slider__arrow slider__arrow_left'
           onClick={handleLeftArrowBtnClick}
