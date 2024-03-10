@@ -5,7 +5,7 @@ import Footer from "./components/footer/footer";
 import HomePage from "./pages/home/home-page";
 import MenuPage from "./pages/menu/menu-page";
 import MainSection from "./components/main-section/main-section";
-import ErrorPage from "./pages/error/error-page";
+import PageNotFound from "./pages/page-not-found/page-not-found";
 import { slides } from "./data/slides";
 import { products } from "./data/products";
 
@@ -22,7 +22,7 @@ export default function App() {
             path='/src/pages/menu/menu.html'
             element={<MenuPage data={products} />}
           />
-          <Route path='*' element={<ErrorPage />} />
+          <Route path='*' element={<PageNotFound />} />
         </Routes>
       </MainSection>
 
