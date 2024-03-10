@@ -6,9 +6,13 @@ import Logo from "../../base/logo/logo";
 import MenuNavigationLink from "../../base/menu-navigation-link/menu-navigation-link";
 import BurgerButton from "../../base/burger-button/burger-button";
 import MobileNavigation from "../mobile-navigation/mobile-navigation";
+import { goToUrl } from "../../utils/helpers/common-helper";
+
+const isMenuPage = window.location.href.includes("menu");
 
 const HeaderBlock = () => {
   const [showMobileNavigation, setShowMobileNavigation] = useState(false);
+  const [isMenuLinkActive, setIsMenuLinkActive] = useState(isMenuPage);
 
   useEffect(() => {
     if (showMobileNavigation) {
@@ -24,6 +28,26 @@ const HeaderBlock = () => {
 
   const handleCloseMobileNavigationButtonClick = () => {
     setShowMobileNavigation(false);
+  };
+
+  const handleNavigationLinksClick = (e) => {
+    if (e.target.classList.contains("mobile-navigation__link")) {
+      const clickedLinkUrl = e.target.href;
+      e.preventDefault();
+      setShowMobileNavigation(false);
+      goToUrl(clickedLinkUrl);
+    }
+  };
+
+  const handleMenuLinkClick = (e) => {
+    const menuLink = e.target.closest(".mobile-navigation__menu-link");
+    e.preventDefault();
+
+    if (!isMenuLinkActive) {
+      setShowMobileNavigation(false);
+      setIsMenuLinkActive(true);
+      goToUrl(menuLink.href);
+    }
   };
 
   return (
@@ -43,7 +67,12 @@ const HeaderBlock = () => {
           />
         </Wrapper>
       </Header>
-      <MobileNavigation isShown={showMobileNavigation} />
+      <MobileNavigation
+        isShown={showMobileNavigation}
+        isMenuLinkActive={isMenuLinkActive}
+        onNavigationLinksClick={handleNavigationLinksClick}
+        onMenuLinkClick={handleMenuLinkClick}
+      />
     </>
   );
 };
