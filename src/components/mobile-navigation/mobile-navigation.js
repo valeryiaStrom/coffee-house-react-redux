@@ -32,7 +32,7 @@ const MobileNavigation = ({ isShown }) => {
         </li>
       </ul>
       <a
-        href='./src/html/menu.html'
+        href='/src/pages/menu/menu.html'
         className='mobile-navigation__item mobile-navigation__link mobile-navigation__menu-link'
       >
         <span>Menu</span>
