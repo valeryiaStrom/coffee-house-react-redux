@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Tabs from "../../base/tabs/tabs";
+import Tab from "../../base/tab/tab";
 
 const MenuItemModal = ({ data, isOpen }) => {
   const [selectedSizeId, setSelectedSizeId] = useState(0);
@@ -92,54 +94,72 @@ const MenuItemModal = ({ data, isOpen }) => {
 
           <div className='modal__sizes'>
             <span className='modal__sizes-label'>Size</span>
-            <div className='modal__sizes-tabs tabs' onClick={handleSizeClick}>
+            <Tabs cn={"modal__sizes-tabs"} onTabClick={handleSizeClick}>
               {sizes.map((sizeData) => {
+                // return (
+                //   <div
+                //     key={sizeData.id}
+                //     className={
+                //       selectedSizeId === sizeData.id ? "tab tab_active" : "tab"
+                //     }
+                //     data-id={sizeData.id}
+                //     data-addprice={sizeData["add-price"]}
+                //   >
+                //     <span className='tab__icon'>
+                //       <span className='icon'>{sizeData.label}</span>
+                //     </span>
+                //     <span className='tab__text'>{sizeData.size}</span>
+                //   </div>
+                // );
                 return (
-                  <div
+                  <Tab
                     key={sizeData.id}
-                    className={
-                      selectedSizeId === sizeData.id ? "tab tab_active" : "tab"
-                    }
-                    data-id={sizeData.id}
-                    data-addprice={sizeData["add-price"]}
-                  >
-                    <span className='tab__icon'>
-                      <span className='icon'>{sizeData.label}</span>
-                    </span>
-                    <span className='tab__text'>{sizeData.size}</span>
-                  </div>
+                    id={sizeData.id}
+                    isActive={selectedSizeId === sizeData.id}
+                    iconText={sizeData.label}
+                    tabText={sizeData.size}
+                  />
                 );
               })}
-            </div>
+            </Tabs>
           </div>
 
           <div className='modal__additivies'>
             <span className='modal__additivies-label'>Additives</span>
 
-            <div
-              className='modal__additivies-tabs tabs'
-              onClick={handleAdditiveClick}
+            <Tabs
+              cn={"modal__additivies-tabs"}
+              onTabClick={handleAdditiveClick}
             >
               {additives.map((additiveData, i) => {
+                // return (
+                //   <div
+                //     key={additiveData.id}
+                //     className={
+                //       selectedAdditivesIds.includes(additiveData.id)
+                //         ? "tab tab_active"
+                //         : "tab"
+                //     }
+                //     data-id={additiveData.id}
+                //     data-addprice={additiveData["add-price"]}
+                //   >
+                //     <span className='tab__icon'>
+                //       <span className='icon'>{i + 1}</span>
+                //     </span>
+                //     <span className='tab__text'>{additiveData.name}</span>
+                //   </div>
+                // );
                 return (
-                  <div
+                  <Tab
                     key={additiveData.id}
-                    className={
-                      selectedAdditivesIds.includes(additiveData.id)
-                        ? "tab tab_active"
-                        : "tab"
-                    }
-                    data-id={additiveData.id}
-                    data-addprice={additiveData["add-price"]}
-                  >
-                    <span className='tab__icon'>
-                      <span className='icon'>{i + 1}</span>
-                    </span>
-                    <span className='tab__text'>{additiveData.name}</span>
-                  </div>
+                    id={additiveData.id}
+                    isActive={selectedAdditivesIds.includes(additiveData.id)}
+                    iconText={i + 1}
+                    tabText={additiveData.name}
+                  />
                 );
               })}
-            </div>
+            </Tabs>
           </div>
 
           <div className='modal__total'>
