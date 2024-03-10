@@ -20,7 +20,7 @@ const Navigation = () => {
           </a>
         </li>
         <li className='navigation__item'>
-          <a href='./#footer' className='navigation__link'>
+          <a href='#footer' className='navigation__link'>
             Contact us
           </a>
         </li>

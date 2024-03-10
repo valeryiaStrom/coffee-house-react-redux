@@ -50,13 +50,23 @@ const HeaderBlock = () => {
   };
 
   const handleMenuLinkClick = (e) => {
-    const menuLink = e.target.closest(".mobile-navigation__menu-link");
-    e.preventDefault();
+    // for mobile menu link
+    if (e.target.closest(".mobile-navigation__menu-link")) {
+      const menuLink = e.target.closest(".mobile-navigation__menu-link");
+      e.preventDefault();
 
-    if (!isMenuLinkActive) {
-      setShowMobileNavigation(false);
-      setIsMenuLinkActive(true);
-      goToUrl(menuLink.href);
+      if (!isMenuLinkActive) {
+        setShowMobileNavigation(false);
+        setIsMenuLinkActive(true);
+        goToUrl(menuLink.href);
+      }
+    } else {
+      // for desktop menu link
+      if (!isMenuLinkActive) {
+        setIsMenuLinkActive(true);
+      } else {
+        e.preventDefault();
+      }
     }
   };
 
@@ -66,7 +76,10 @@ const HeaderBlock = () => {
         <Wrapper cn='header__wrapper'>
           <Logo></Logo>
           <Navigation />
-          <MenuNavigationLink />
+          <MenuNavigationLink
+            isActive={isMenuLinkActive}
+            onClick={handleMenuLinkClick}
+          />
           <BurgerButton
             isMobileNavigationExpanded={showMobileNavigation}
             onClick={
