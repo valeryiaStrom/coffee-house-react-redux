@@ -94,23 +94,9 @@ const MenuItemModal = ({ data, isOpen }) => {
 
           <div className='modal__sizes'>
             <span className='modal__sizes-label'>Size</span>
+
             <Tabs cn={"modal__sizes-tabs"} onTabClick={handleSizeClick}>
               {sizes.map((sizeData) => {
-                // return (
-                //   <div
-                //     key={sizeData.id}
-                //     className={
-                //       selectedSizeId === sizeData.id ? "tab tab_active" : "tab"
-                //     }
-                //     data-id={sizeData.id}
-                //     data-addprice={sizeData["add-price"]}
-                //   >
-                //     <span className='tab__icon'>
-                //       <span className='icon'>{sizeData.label}</span>
-                //     </span>
-                //     <span className='tab__text'>{sizeData.size}</span>
-                //   </div>
-                // );
                 return (
                   <Tab
                     key={sizeData.id}
@@ -132,23 +118,6 @@ const MenuItemModal = ({ data, isOpen }) => {
               onTabClick={handleAdditiveClick}
             >
               {additives.map((additiveData, i) => {
-                // return (
-                //   <div
-                //     key={additiveData.id}
-                //     className={
-                //       selectedAdditivesIds.includes(additiveData.id)
-                //         ? "tab tab_active"
-                //         : "tab"
-                //     }
-                //     data-id={additiveData.id}
-                //     data-addprice={additiveData["add-price"]}
-                //   >
-                //     <span className='tab__icon'>
-                //       <span className='icon'>{i + 1}</span>
-                //     </span>
-                //     <span className='tab__text'>{additiveData.name}</span>
-                //   </div>
-                // );
                 return (
                   <Tab
                     key={additiveData.id}
