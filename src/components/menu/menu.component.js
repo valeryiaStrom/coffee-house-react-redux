@@ -18,10 +18,17 @@ import {
 } from "../../utils/helpers/menu-modal-helper";
 import MenuItemModal from "../menu-item-modal/menu-item-modal";
 
-const DEFAULT_SELECTED_TAB = "coffee";
+// const DEFAULT_SELECTED_TAB = "coffee";
 
-const Menu = ({ data }) => {
-  const [selectedTab, setSelectedTab] = useState(DEFAULT_SELECTED_TAB);
+const Menu = ({
+  data,
+  categories,
+  selectedCategory,
+  products,
+  isLoading,
+  setSelectedCategory,
+}) => {
+  // const [selectedTab, setSelectedTab] = useState(DEFAULT_SELECTED_TAB);
   const [clientWidth, setClientWidth] = useState(getClientWidth);
   const [loadMoreButtonClicked, setLoadMoreButtonClicked] = useState(false);
   const [clickedMenuItemId, setClickedMenuItemId] = useState(null);
@@ -50,8 +57,8 @@ const Menu = ({ data }) => {
     }
   }, [isModalOpen]);
 
-  const createTabs = (data) => {
-    const tabsData = prepareTabsData(data);
+  const createTabs = (categories) => {
+    const tabsData = prepareTabsData(categories);
     const tabs = [];
 
     tabsData.forEach((tab) => {
@@ -59,7 +66,7 @@ const Menu = ({ data }) => {
         <Tab
           key={tab.category}
           id={tab.category}
-          isActive={selectedTab === tab.category}
+          isActive={tab.category === selectedCategory}
           tabText={tab.label}
           iconCn={tab.iconClassName}
         />
@@ -73,17 +80,20 @@ const Menu = ({ data }) => {
     if (e.target.closest(".tab")) {
       const clickedTab = e.target.closest(".tab");
       const clickedTabId = clickedTab.getAttribute("data-id");
-      setSelectedTab(clickedTabId);
+      // setSelectedTab(clickedTabId);
+      setSelectedCategory(clickedTabId);
       setLoadMoreButtonClicked(false);
     }
   };
 
-  const createMenuItems = (data) => {
+  const createMenuItems = (products) => {
     const menuItems = [];
-    data.forEach((item, i) => {
-      if (item.category === selectedTab) {
-        menuItems.push(<MenuItem props={item} key={i} />);
-      }
+    products.forEach((item, i) => {
+      // if (item.category === selectedTab) {
+      //   menuItems.push(<MenuItem props={item} key={i} />);
+      // }
+
+      menuItems.push(<MenuItem props={item} key={i} />);
     });
 
     if (
@@ -97,16 +107,28 @@ const Menu = ({ data }) => {
     return menuItems;
   };
 
-  const shouldShowLoadMoreButton = (data) => {
-    const menuItems = [];
-    data.forEach((item, i) => {
-      if (item.category === selectedTab) {
-        menuItems.push(item);
-      }
-    });
+  // const shouldShowLoadMoreButton = (data) => {
+  //   const menuItems = [];
+  //   data.forEach((item, i) => {
+  //     if (item.category === selectedTab) {
+  //       menuItems.push(item);
+  //     }
+  //   });
 
+  //   if (
+  //     menuItems.length > MAX_PRODUCTS_COUNT_TABLET &&
+  //     clientWidth <= TABLET_SMALL_WIDTH &&
+  //     !loadMoreButtonClicked
+  //   ) {
+  //     return true;
+  //   }
+
+  //   return false;
+  // };
+
+  const shouldShowLoadMoreButton = (products) => {
     if (
-      menuItems.length > MAX_PRODUCTS_COUNT_TABLET &&
+      products.length > MAX_PRODUCTS_COUNT_TABLET &&
       clientWidth <= TABLET_SMALL_WIDTH &&
       !loadMoreButtonClicked
     ) {
@@ -144,9 +166,12 @@ const Menu = ({ data }) => {
     }
   };
 
-  const tabs = createTabs(data);
-  const menuItems = createMenuItems(data);
-  const showLoadMoreButton = shouldShowLoadMoreButton(data);
+  console.log(products);
+  console.log(isLoading);
+
+  const tabs = createTabs(categories);
+  const menuItems = createMenuItems(products);
+  const showLoadMoreButton = shouldShowLoadMoreButton(products);
 
   return (
     <section className='menu' id='menu'>
@@ -160,6 +185,7 @@ const Menu = ({ data }) => {
             {tabs}
           </Tabs>
         </div>
+        {isLoading ? "hello" : "bye"}
         <MenuItems onClick={handleMenuItemClick}>{menuItems}</MenuItems>
         <MenuLoadMoreButton showButton={showLoadMoreButton}>
           <LoadMoreButton onButtonClick={handleLoadMoreButtonClick} />

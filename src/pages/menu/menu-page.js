@@ -1,8 +1,8 @@
 import React from "react";
-import Menu from '../../components/menu/menu.component';
+import MenuContainer from "../../components/menu/menu.container";
 
 const MenuPage = ({ data }) => {
-  return <Menu data={data} />;
+  return <MenuContainer></MenuContainer>;
 };
 
 export default MenuPage;

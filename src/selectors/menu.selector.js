@@ -1,6 +1,7 @@
 import { createSelector } from "reselect";
 
-export const selectMenuState = (state) => state.menu || {};
+// export const selectMenuState = (state) => state.menu || {};
+export const selectMenuState = (state) => state.menu;
 
 export const selectIsMenuLoading = createSelector(
   selectMenuState,
@@ -26,7 +27,14 @@ export const selectGetMenuProductsCategories = createSelector(
   }
 );
 
-// const selectGetTabsData = createSelector(
-//   selectMenuState,
-//   (currentState) => currentState
-// );
+export const selectGetSelectedCategory = createSelector(
+  selectMenuState,
+  (currentState) => currentState.selectedCategory
+);
+
+export const selectGetMenuProductsByCategory = createSelector(
+  [selectGetMenuData, selectGetSelectedCategory],
+  (products, selectedCategory) => {
+    return products.filter((product) => product.category === selectedCategory);
+  }
+);

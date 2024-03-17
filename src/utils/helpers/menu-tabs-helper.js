@@ -1,19 +1,12 @@
 import { capitalizeFirstLetter } from "./string-helper";
 
-export const getMenuCategories = (products) => {
-  const categories = products.map(({ category }) => category);
-  const uniqueCategories = Array.from(new Set(categories));
-  return uniqueCategories;
-};
-
 export const getMenuTabsLabels = (categories) => {
   const labels = categories.map((category) => capitalizeFirstLetter(category));
   return labels;
 };
 
-export const prepareTabsData = (products) => {
-  const menuCategories = getMenuCategories(products);
-  const menuTabsLabels = getMenuTabsLabels(menuCategories);
+export const prepareTabsData = (categories) => {
+  const menuTabsLabels = getMenuTabsLabels(categories);
   const menuTabsIconsClassNamesMap = new Map();
   menuTabsIconsClassNamesMap.set("coffee", "icon_menu-tab-coffee");
   menuTabsIconsClassNamesMap.set("tea", "icon_menu-tab-tea");
@@ -21,7 +14,7 @@ export const prepareTabsData = (products) => {
 
   const output = [];
 
-  menuCategories.forEach((category, i) => {
+  categories.forEach((category, i) => {
     output.push({
       category,
       label: menuTabsLabels[i],

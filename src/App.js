@@ -8,9 +8,12 @@ import MainSection from "./components/main-section/main-section";
 import PageNotFound from "./pages/page-not-found/page-not-found";
 import { slides } from "./data/slides";
 import { products } from "./data/products";
+import { Provider } from 'react-redux';
+import store from './store';
 
 export default function App() {
   return (
+    <Provider store={store}>
     <div>
       <HeaderBlock />
 
@@ -28,5 +31,6 @@ export default function App() {
 
       <Footer />
     </div>
+    </Provider>
   );
 }
