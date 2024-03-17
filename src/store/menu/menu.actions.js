@@ -1,26 +1,26 @@
 import {
-  GET_MENU_ITEMS,
-  GET_MENU_ITEMS_COMPLETED,
-  GET_MENU_ITEMS_FAILED,
+  GET_MENU_PAGE,
+  GET_MENU_PAGE_COMPLETED,
+  GET_MENU_PAGE_FAILED,
 } from "./menu.constants";
 
-export const getMenuItems = (payload) => {
+export const getMenuPage = (payload) => {
   return {
-    type: GET_MENU_ITEMS,
+    type: GET_MENU_PAGE,
     payload,
   };
 };
 
-export const getMenuItemsCompleted = (payload) => {
+export const getMenuPageCompleted = (payload) => {
   return {
-    type: GET_MENU_ITEMS_COMPLETED,
+    type: GET_MENU_PAGE_COMPLETED,
     payload,
   };
 };
 
-export const getMenuItemsFailed = (payload) => {
+export const getMenuPageFailed = (payload) => {
   return {
-    type: GET_MENU_ITEMS_FAILED,
+    type: GET_MENU_PAGE_FAILED,
     payload,
   };
 };

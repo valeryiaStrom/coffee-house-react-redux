@@ -1,34 +1,34 @@
 import {
-  GET_MENU_ITEMS,
-  GET_MENU_ITEMS_COMPLETED,
-  GET_MENU_ITEMS_FAILED,
+  GET_MENU_PAGE,
+  GET_MENU_PAGE_COMPLETED,
+  GET_MENU_PAGE_FAILED,
 } from "./menu.constants";
 
 const initialState = {
-  isFetching: false,
+  isLoading: false,
   data: {},
   error: null,
 };
 
 const menuRecuer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_MENU_ITEMS:
+    case GET_MENU_PAGE:
       return {
         ...state,
-        isFetching: true,
+        isLoading: true,
         error: null,
       };
-    case GET_MENU_ITEMS_COMPLETED:
+    case GET_MENU_PAGE_COMPLETED:
       return {
         ...state,
-        isFetching: false,
+        isLoading: false,
         data: action.payload,
         error: null,
       };
-    case GET_MENU_ITEMS_FAILED:
+    case GET_MENU_PAGE_FAILED:
       return {
         ...state,
-        isFetching: false,
+        isLoading: false,
         data: {},
         error: action.payload,
       };
