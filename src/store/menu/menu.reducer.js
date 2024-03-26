@@ -11,6 +11,7 @@ const initialState = {
   isLoading: true,
   selectedCategory: "coffee",
   data: products,
+  shouldShowLoadMoreButton: false,
   error: null,
 };
 

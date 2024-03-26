@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Wrapper from "../../base/wrapper/wrapper";
 import Tabs from "../../base/tabs/tabs";
 import MenuItems from "../menu-items/menu-items";
@@ -18,21 +18,20 @@ import {
 } from "../../utils/helpers/menu-modal-helper";
 import MenuItemModal from "../menu-item-modal/menu-item-modal";
 
-// const DEFAULT_SELECTED_TAB = "coffee";
-
 const Menu = ({
-  data,
   categories,
   selectedCategory,
   products,
   isLoading,
   setSelectedCategory,
 }) => {
-  // const [selectedTab, setSelectedTab] = useState(DEFAULT_SELECTED_TAB);
   const [clientWidth, setClientWidth] = useState(getClientWidth);
   const [loadMoreButtonClicked, setLoadMoreButtonClicked] = useState(false);
   const [clickedMenuItemId, setClickedMenuItemId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // TODO: сделать чтобы load more btn состояние не ресетилось, если бзер кликнул кнопку, потом сходил на другую табу,
+  // а потом вернулся обратно
 
   useEffect(() => {
     const handleResize = () => {
@@ -80,19 +79,14 @@ const Menu = ({
     if (e.target.closest(".tab")) {
       const clickedTab = e.target.closest(".tab");
       const clickedTabId = clickedTab.getAttribute("data-id");
-      // setSelectedTab(clickedTabId);
       setSelectedCategory(clickedTabId);
-      setLoadMoreButtonClicked(false);
+      // setLoadMoreButtonClicked(false);
     }
   };
 
   const createMenuItems = (products) => {
     const menuItems = [];
     products.forEach((item, i) => {
-      // if (item.category === selectedTab) {
-      //   menuItems.push(<MenuItem props={item} key={i} />);
-      // }
-
       menuItems.push(<MenuItem props={item} key={i} />);
     });
 
@@ -106,25 +100,6 @@ const Menu = ({
 
     return menuItems;
   };
-
-  // const shouldShowLoadMoreButton = (data) => {
-  //   const menuItems = [];
-  //   data.forEach((item, i) => {
-  //     if (item.category === selectedTab) {
-  //       menuItems.push(item);
-  //     }
-  //   });
-
-  //   if (
-  //     menuItems.length > MAX_PRODUCTS_COUNT_TABLET &&
-  //     clientWidth <= TABLET_SMALL_WIDTH &&
-  //     !loadMoreButtonClicked
-  //   ) {
-  //     return true;
-  //   }
-
-  //   return false;
-  // };
 
   const shouldShowLoadMoreButton = (products) => {
     if (
@@ -191,7 +166,7 @@ const Menu = ({
           <LoadMoreButton onButtonClick={handleLoadMoreButtonClick} />
         </MenuLoadMoreButton>
       </Wrapper>
-      {isModalOpen && createModalWindow(data)}
+      {isModalOpen && createModalWindow(products)}
     </section>
   );
 };
