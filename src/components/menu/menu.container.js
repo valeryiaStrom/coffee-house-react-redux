@@ -14,7 +14,9 @@ const MenuContainer = ({
   selectedCategory,
   products,
   isLoading,
-  setSelectedCategory
+  setSelectedCategory,
+  loadMoreButtonClicked,
+  setLoadMoreButtonClicked
 }) => {
   return (
     <Menu

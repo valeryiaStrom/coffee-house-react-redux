@@ -33,6 +33,11 @@ const Menu = ({
   // TODO: сделать чтобы load more btn состояние не ресетилось, если бзер кликнул кнопку, потом сходил на другую табу,
   // а потом вернулся обратно
 
+
+  // if load more button was clicked for that tab then setLoadMoreButtonClicked(true)
+
+  console.log(loadMoreButtonClicked)
+
   useEffect(() => {
     const handleResize = () => {
       const clientWidth = getClientWidth();
@@ -80,7 +85,7 @@ const Menu = ({
       const clickedTab = e.target.closest(".tab");
       const clickedTabId = clickedTab.getAttribute("data-id");
       setSelectedCategory(clickedTabId);
-      // setLoadMoreButtonClicked(false);
+      setLoadMoreButtonClicked(false);
     }
   };
 
@@ -114,6 +119,7 @@ const Menu = ({
   };
 
   const handleLoadMoreButtonClick = () => {
+    console.log("load more clicked");
     setLoadMoreButtonClicked(true);
   };
 
@@ -140,9 +146,6 @@ const Menu = ({
       setIsModalOpen(true);
     }
   };
-
-  console.log(products);
-  console.log(isLoading);
 
   const tabs = createTabs(categories);
   const menuItems = createMenuItems(products);

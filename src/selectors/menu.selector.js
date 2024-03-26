@@ -38,3 +38,4 @@ export const selectGetMenuProductsByCategory = createSelector(
     return products.filter((product) => product.category === selectedCategory);
   }
 );
+
