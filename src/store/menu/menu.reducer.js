@@ -9,6 +9,7 @@ import { products } from "../../data/products";
 
 const initialState = {
   isLoading: true,
+  categories: ["coffee", "tea", "dessert"],
   selectedCategory: "coffee",
   data: products,
   error: null,

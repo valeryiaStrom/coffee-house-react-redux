@@ -18,13 +18,9 @@ export const selectGetMenuError = createSelector(
   (currentState) => currentState.error
 );
 
-export const selectGetMenuProductsCategories = createSelector(
-  selectGetMenuData,
-  (products) => {
-    const categories = products.map(({ category }) => category);
-    const uniqueCategories = Array.from(new Set(categories));
-    return uniqueCategories;
-  }
+export const selectGetCategories = createSelector(
+  selectMenuState,
+  (currentState) => currentState.categories
 );
 
 export const selectGetSelectedCategory = createSelector(
@@ -32,10 +28,9 @@ export const selectGetSelectedCategory = createSelector(
   (currentState) => currentState.selectedCategory
 );
 
-export const selectGetMenuProductsByCategory = createSelector(
+export const selectGetProductsByCategory = createSelector(
   [selectGetMenuData, selectGetSelectedCategory],
   (products, selectedCategory) => {
     return products.filter((product) => product.category === selectedCategory);
   }
 );
-

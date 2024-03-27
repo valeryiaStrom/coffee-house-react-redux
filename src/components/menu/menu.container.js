@@ -2,8 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import Menu from "./menu.component";
 import {
-  selectGetMenuProductsCategories,
-  selectGetMenuProductsByCategory,
+  selectGetCategories,
+  selectGetProductsByCategory,
   selectIsMenuLoading,
   selectGetSelectedCategory,
 } from "../../selectors/menu.selector";
@@ -15,8 +15,6 @@ const MenuContainer = ({
   products,
   isLoading,
   setSelectedCategory,
-  loadMoreButtonClicked,
-  setLoadMoreButtonClicked
 }) => {
   return (
     <Menu
@@ -31,9 +29,9 @@ const MenuContainer = ({
 
 const mapStateToProps = (state) => {
   return {
-    categories: selectGetMenuProductsCategories(state),
+    categories: selectGetCategories(state),
     selectedCategory: selectGetSelectedCategory(state),
-    products: selectGetMenuProductsByCategory(state),
+    products: selectGetProductsByCategory(state),
     isLoading: selectIsMenuLoading(state),
   };
 };
