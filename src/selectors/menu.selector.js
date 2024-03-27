@@ -34,3 +34,8 @@ export const selectGetProductsByCategory = createSelector(
     return products.filter((product) => product.category === selectedCategory);
   }
 );
+
+export const selectGetIsLoadMoreButtonClicked = createSelector(
+  selectMenuState,
+  (currentState) => currentState.isLoadMoreButtonClicked
+);

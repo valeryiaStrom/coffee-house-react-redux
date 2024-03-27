@@ -23,20 +23,15 @@ const Menu = ({
   selectedCategory,
   products,
   isLoading,
+  isLoadMoreButtonClickedForCategory,
   setSelectedCategory,
+  setLoadMoreButtonClickedForCategory,
 }) => {
   const [clientWidth, setClientWidth] = useState(getClientWidth);
-  const [loadMoreButtonClicked, setLoadMoreButtonClicked] = useState(false);
   const [clickedMenuItemId, setClickedMenuItemId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // TODO: сделать чтобы load more btn состояние не ресетилось, если бзер кликнул кнопку, потом сходил на другую табу,
-  // а потом вернулся обратно
-
-
-  // if load more button was clicked for that tab then setLoadMoreButtonClicked(true)
-
-  console.log(loadMoreButtonClicked)
+  console.log(isLoadMoreButtonClickedForCategory);
 
   useEffect(() => {
     const handleResize = () => {
@@ -85,7 +80,6 @@ const Menu = ({
       const clickedTab = e.target.closest(".tab");
       const clickedTabId = clickedTab.getAttribute("data-id");
       setSelectedCategory(clickedTabId);
-      setLoadMoreButtonClicked(false);
     }
   };
 
@@ -98,7 +92,7 @@ const Menu = ({
     if (
       clientWidth <= TABLET_SMALL_WIDTH &&
       menuItems.length > MAX_PRODUCTS_COUNT_TABLET &&
-      !loadMoreButtonClicked
+      !isLoadMoreButtonClickedForCategory[selectedCategory]
     ) {
       menuItems.length = MAX_PRODUCTS_COUNT_TABLET;
     }
@@ -110,7 +104,7 @@ const Menu = ({
     if (
       products.length > MAX_PRODUCTS_COUNT_TABLET &&
       clientWidth <= TABLET_SMALL_WIDTH &&
-      !loadMoreButtonClicked
+      !isLoadMoreButtonClickedForCategory[selectedCategory]
     ) {
       return true;
     }
@@ -120,7 +114,10 @@ const Menu = ({
 
   const handleLoadMoreButtonClick = () => {
     console.log("load more clicked");
-    setLoadMoreButtonClicked(true);
+    setLoadMoreButtonClickedForCategory({
+      ...isLoadMoreButtonClickedForCategory,
+      [selectedCategory]: true,
+    });
   };
 
   const createModalWindow = (data) => {

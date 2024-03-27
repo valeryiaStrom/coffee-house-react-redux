@@ -3,6 +3,7 @@ import {
   GET_MENU_PAGE_COMPLETED,
   GET_MENU_PAGE_FAILED,
   SET_SELECTED_CATEGORY,
+  SET_LOAD_MORE_BUTTON_CLICKED_FOR_CATEGORY,
 } from "./menu.constants";
 
 export const getMenuPage = (payload) => {
@@ -30,6 +31,13 @@ export const getMenuPageFailed = (payload) => {
 export const setSelectedCategory = (payload) => {
   return {
     type: SET_SELECTED_CATEGORY,
+    payload,
+  };
+};
+
+export const setLoadMoreButtonClickedForCategory = (payload) => {
+  return {
+    type: SET_LOAD_MORE_BUTTON_CLICKED_FOR_CATEGORY,
     payload,
   };
 };

@@ -3,6 +3,7 @@ import {
   GET_MENU_PAGE_COMPLETED,
   GET_MENU_PAGE_FAILED,
   SET_SELECTED_CATEGORY,
+  SET_LOAD_MORE_BUTTON_CLICKED_FOR_CATEGORY,
 } from "./menu.constants";
 
 import { products } from "../../data/products";
@@ -11,6 +12,11 @@ const initialState = {
   isLoading: true,
   categories: ["coffee", "tea", "dessert"],
   selectedCategory: "coffee",
+  isLoadMoreButtonClicked: {
+    coffee: false,
+    tea: false,
+    dessert: false,
+  },
   data: products,
   error: null,
 };
@@ -45,6 +51,12 @@ const menuRecuer = (state = initialState, action) => {
       return {
         ...state,
         selectedCategory: action.payload,
+      };
+
+    case SET_LOAD_MORE_BUTTON_CLICKED_FOR_CATEGORY:
+      return {
+        ...state,
+        isLoadMoreButtonClicked: action.payload,
       };
     default:
       return state;
