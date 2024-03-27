@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 const INITIAL_ACTIVE_CONTROL_INDEX = 0;
 
-const Slider = ({ data }) => {
+const Slider = ({ slides }) => {
   const [activeControlIndex, setActiveControlIndex] = useState(
     INITIAL_ACTIVE_CONTROL_INDEX
   );
@@ -131,7 +131,7 @@ const Slider = ({ data }) => {
           <span className='icon slider__arrow-icon slider__arrow-icon_left'></span>
         </span>
         <ul className='slider__slides'>
-          {data.map((slide, i) => {
+          {slides.map((slide, i) => {
             return (
               <li
                 key={slide.id}
@@ -167,7 +167,7 @@ const Slider = ({ data }) => {
       </div>
       <div className='slider__controls'>
         <div className='controls' ref={controlsRef}>
-          {data.map((slide, i) => {
+          {slides.map((slide, i) => {
             return (
               <span
                 key={slide.id}

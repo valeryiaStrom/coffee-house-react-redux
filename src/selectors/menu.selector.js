@@ -1,7 +1,6 @@
 import { createSelector } from "reselect";
 
-// export const selectMenuState = (state) => state.menu || {};
-export const selectMenuState = (state) => state.menu;
+export const selectMenuState = (state) => state.menu || {};
 
 export const selectIsMenuLoading = createSelector(
   selectMenuState,

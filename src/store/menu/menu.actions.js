@@ -7,7 +7,6 @@ import {
 } from "./menu.constants";
 
 export const getMenuPage = (payload) => {
-  console.log("action");
   return {
     type: GET_MENU_PAGE,
     payload,
