@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import Tabs from "../../base/tabs/tabs";
 import Tab from "../../base/tab/tab";
 
@@ -160,6 +161,33 @@ const MenuItemModal = ({ data, isOpen }) => {
       </div>
     </div>
   );
+};
+
+MenuItemModal.propTypes = {
+  data: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    imageSrc: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
+    currency: PropTypes.string.isRequired,
+    sizes: PropTypes.array.isRequired,
+    additives: PropTypes.array.isRequired,
+  }),
+  isOpen: PropTypes.bool.isRequired,
+};
+
+MenuItemModal.defaultProps = {
+  data: {
+    id: "",
+    imageSrc: "",
+    name: "",
+    description: "",
+    price: "",
+    currency: "",
+    sizes: [],
+    additives: [],
+  },
 };
 
 export default MenuItemModal;

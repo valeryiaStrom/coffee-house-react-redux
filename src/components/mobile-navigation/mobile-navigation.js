@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const MobileNavigation = ({
   isShown,
@@ -53,6 +54,14 @@ const MobileNavigation = ({
       </a>
     </nav>
   );
+};
+
+MobileNavigation.propTypes = {
+  isShown: PropTypes.bool.isRequired,
+  offsetTop: PropTypes.number,
+  isMenuLinkActive: PropTypes.bool.isRequired,
+  onNavigationLinksClick: PropTypes.func.isRequired,
+  onMenuLinkClick: PropTypes.func.isRequired,
 };
 
 export default MobileNavigation;

@@ -1,13 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-const Tab = ({
-  id,
-  isActive = false,
-  tabText,
-  iconCn,
-  iconText,
-  onClick,
-}) => {
+const Tab = ({ id, isActive = false, tabText, iconCn, iconText, onClick }) => {
   const tabClassName = isActive ? "tab tab_active" : "tab";
   const tabIconClassName = iconCn ? `icon ${iconCn}` : "icon";
   const tabIconText = iconText ? iconText : "";
@@ -20,6 +14,15 @@ const Tab = ({
       <span className='tab__text'>{tabText}</span>
     </div>
   );
+};
+
+Tab.propTypes = {
+  id: PropTypes.string.isRequired,
+  isActive: PropTypes.bool.isRequired,
+  tabText: PropTypes.string.isRequired,
+  iconCn: PropTypes.string,
+  iconText: PropTypes.string,
+  onClick: PropTypes.string,
 };
 
 export default Tab;

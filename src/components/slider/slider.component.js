@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import PropTypes from "prop-types";
 const INITIAL_ACTIVE_CONTROL_INDEX = 0;
 
 const Slider = ({ slides }) => {
@@ -186,6 +187,10 @@ const Slider = ({ slides }) => {
       </div>
     </div>
   );
+};
+
+Slider.propTypes = {
+  slides: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default Slider;

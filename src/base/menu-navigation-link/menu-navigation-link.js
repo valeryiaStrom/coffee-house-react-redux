@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const MenuNavigationLink = ({ isActive, onClick }) => {
   return (
@@ -15,6 +16,11 @@ const MenuNavigationLink = ({ isActive, onClick }) => {
       <span className='icon icon_coffee'></span>
     </a>
   );
+};
+
+MenuNavigationLink.propTypes = {
+  isActive: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default MenuNavigationLink;

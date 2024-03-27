@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import Wrapper from "../../base/wrapper/wrapper";
 import Tabs from "../../base/tabs/tabs";
 import MenuItems from "../menu-items/menu-items";
@@ -169,6 +170,28 @@ const Menu = ({
       {isModalOpen && createModalWindow(products)}
     </section>
   );
+};
+
+Menu.propTypes = {
+  categories: PropTypes.array.isRequired,
+  selectedCategory: PropTypes.string.isRequired,
+  products: PropTypes.array.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  isLoadMoreButtonClickedForCategory: PropTypes.shape({
+    coffee: PropTypes.bool.isRequired,
+    tea: PropTypes.bool.isRequired,
+    dessert: PropTypes.bool.isRequired,
+  }),
+  setSelectedCategory: PropTypes.func.isRequired,
+  setLoadMoreButtonClickedForCategory: PropTypes.func.isRequired,
+};
+
+Menu.defaultProps = {
+  isLoadMoreButtonClickedForCategory: {
+    coffee: false,
+    tea: false,
+    dessert: false,
+  },
 };
 
 export default Menu;

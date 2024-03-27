@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const MenuLoadMoreButton = ({ showButton, children }) => {
   return (
@@ -12,6 +13,11 @@ const MenuLoadMoreButton = ({ showButton, children }) => {
       {children}
     </div>
   );
+};
+
+MenuLoadMoreButton.propTypes = {
+  showButton: PropTypes.bool.isRequired,
+  children: PropTypes.element.isRequired,
 };
 
 export default MenuLoadMoreButton;

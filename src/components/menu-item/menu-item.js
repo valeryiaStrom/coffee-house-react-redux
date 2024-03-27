@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const MenuItem = ({ props }) => {
   const { id, imageSrc, name, description, price, currency } = props;
@@ -22,5 +23,14 @@ const MenuItem = ({ props }) => {
     </article>
   );
 };
+
+MenuItem.propTypes = {
+  id: PropTypes.string.isRequired,
+  imageSrc: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  price: PropTypes.string.isRequired,
+  currency: PropTypes.string.isRequired,
+}
 
 export default MenuItem;
