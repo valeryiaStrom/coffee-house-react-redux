@@ -17,11 +17,14 @@ const Tab = ({ id, isActive = false, tabText, iconCn, iconText, onClick }) => {
 };
 
 Tab.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.oneOfType([
+    PropTypes.number.isRequired,
+    PropTypes.string.isRequired,
+  ]),
   isActive: PropTypes.bool.isRequired,
   tabText: PropTypes.string.isRequired,
   iconCn: PropTypes.string,
-  iconText: PropTypes.string,
+  iconText: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   onClick: PropTypes.string,
 };
 

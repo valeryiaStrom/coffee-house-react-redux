@@ -174,7 +174,7 @@ MenuItemModal.propTypes = {
     sizes: PropTypes.array.isRequired,
     additives: PropTypes.array.isRequired,
   }),
-  isOpen: PropTypes.bool.isRequired,
+  isOpen: PropTypes.func.isRequired,
 };
 
 MenuItemModal.defaultProps = {

@@ -12,7 +12,7 @@ const Tabs = ({ cn, onTabClick, children }) => {
 Tabs.propTypes = {
   cn: PropTypes.string.isRequired,
   onTabClick: PropTypes.func.isRequired,
-  children: PropTypes.element.isRequired,
+  children: PropTypes.arrayOf(PropTypes.element),
 };
 
 export default Tabs;

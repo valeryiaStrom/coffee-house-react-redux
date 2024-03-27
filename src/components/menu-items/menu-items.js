@@ -10,7 +10,7 @@ const MenuItems = ({ children, onClick }) => {
 };
 
 MenuItems.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.arrayOf(PropTypes.element),
   onClick: PropTypes.func.isRequired,
 };
 

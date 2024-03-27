@@ -25,12 +25,14 @@ const MenuItem = ({ props }) => {
 };
 
 MenuItem.propTypes = {
-  id: PropTypes.string.isRequired,
-  imageSrc: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired,
-  currency: PropTypes.string.isRequired,
-}
+  props: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    imageSrc: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
+    currency: PropTypes.string.isRequired,
+  }),
+};
 
 export default MenuItem;
