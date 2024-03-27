@@ -7,30 +7,26 @@ import MenuPage from "./pages/menu/menu-page";
 import MainSection from "./components/main-section/main-section";
 import PageNotFound from "./pages/page-not-found/page-not-found";
 import { slides } from "./data/slides";
-import { products } from "./data/products";
-import { Provider } from 'react-redux';
-import store from './store';
+import { Provider } from "react-redux";
+import store from "./store";
 
 export default function App() {
   return (
     <Provider store={store}>
-    <div>
-      <HeaderBlock />
+      <div>
+        <HeaderBlock />
 
-      <MainSection>
-        <Routes>
-          <Route path='/' element={<HomePage data={slides} />} />
-          <Route path='/index.html' element={<HomePage data={slides} />} />
-          <Route
-            path='/src/pages/menu/menu.html'
-            element={<MenuPage data={products} />}
-          />
-          <Route path='*' element={<PageNotFound />} />
-        </Routes>
-      </MainSection>
+        <MainSection>
+          <Routes>
+            <Route path='/' element={<HomePage data={slides} />} />
+            <Route path='/index.html' element={<HomePage data={slides} />} />
+            <Route path='/src/pages/menu/menu.html' element={<MenuPage />} />
+            <Route path='*' element={<PageNotFound />} />
+          </Routes>
+        </MainSection>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
     </Provider>
   );
 }

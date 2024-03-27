@@ -1,7 +1,7 @@
 import React from "react";
 import MenuContainer from "../../components/menu/menu.container";
 
-const MenuPage = ({ data }) => {
+const MenuPage = () => {
   return <MenuContainer></MenuContainer>;
 };
 
