@@ -6,7 +6,7 @@ import {
 
 import { slides } from "../../data/slides";
 
-export const getSlides = (payload) => {
+export const getSlides = () => {
   return (dispatch) => {
     dispatch(getSlidesRequested());
 

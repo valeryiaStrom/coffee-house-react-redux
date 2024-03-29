@@ -18,8 +18,10 @@ import {
   prepareProductData,
 } from "../../utils/helpers/menu-modal-helper";
 import MenuItemModal from "../menu-item-modal/menu-item-modal";
+import Loader from "../../base/loader/loader";
 
 const Menu = ({
+  onGetMenuPage,
   categories,
   selectedCategory,
   products,
@@ -32,7 +34,9 @@ const Menu = ({
   const [clickedMenuItemId, setClickedMenuItemId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  console.log(isLoadMoreButtonClickedForCategory);
+  useEffect(() => {
+    onGetMenuPage();
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -161,8 +165,10 @@ const Menu = ({
             {tabs}
           </Tabs>
         </div>
-        {isLoading ? "hello" : "bye"}
-        <MenuItems onClick={handleMenuItemClick}>{menuItems}</MenuItems>
+        <MenuItems onClick={handleMenuItemClick}>
+          {isLoading && <Loader />}
+          {menuItems}
+        </MenuItems>
         <MenuLoadMoreButton showButton={showLoadMoreButton}>
           <LoadMoreButton onButtonClick={handleLoadMoreButtonClick} />
         </MenuLoadMoreButton>

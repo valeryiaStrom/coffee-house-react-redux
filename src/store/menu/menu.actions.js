@@ -1,7 +1,7 @@
 import {
-  GET_MENU_PAGE,
-  GET_MENU_PAGE_COMPLETED,
-  GET_MENU_PAGE_FAILED,
+  GET_MENU_PAGE_REQUESTED,
+  GET_MENU_PAGE_REQUEST_COMPLETED,
+  GET_MENU_PAGE_REQUEST_FAILED,
   SET_SELECTED_CATEGORY,
   SET_LOAD_MORE_BUTTON_CLICKED_FOR_CATEGORY,
 } from "./menu.constants";
@@ -9,35 +9,31 @@ import {
 import { products } from "../../data/products";
 
 export const getMenuPage = () => {
-  // return {
-  //   type: GET_MENU_PAGE,
-  //   payload,
-  // };
-
   return (dispatch) => {
-    dispatch({
-      type: GET_MENU_PAGE,
-    });
+    dispatch(getMenuPageRequested());
 
     setTimeout(() => {
-      dispatch({
-        type: GET_MENU_PAGE_COMPLETED,
-        payload: products,
-      })
-    }, 3000)
+      dispatch(getMenuPageRequestCompleted(products));
+    }, 3000);
   };
 };
 
-export const getMenuPageCompleted = (payload) => {
+const getMenuPageRequested = () => {
   return {
-    type: GET_MENU_PAGE_COMPLETED,
+    type: GET_MENU_PAGE_REQUESTED,
+  };
+};
+
+export const getMenuPageRequestCompleted = (payload) => {
+  return {
+    type: GET_MENU_PAGE_REQUEST_COMPLETED,
     payload,
   };
 };
 
-export const getMenuPageFailed = (payload) => {
+export const getMenuPageRequestFailed = (payload) => {
   return {
-    type: GET_MENU_PAGE_FAILED,
+    type: GET_MENU_PAGE_REQUEST_FAILED,
     payload,
   };
 };

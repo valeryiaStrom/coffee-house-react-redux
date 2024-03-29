@@ -1,12 +1,11 @@
 import {
-  GET_MENU_PAGE,
-  GET_MENU_PAGE_COMPLETED,
-  GET_MENU_PAGE_FAILED,
+  GET_MENU_PAGE_REQUESTED,
+  GET_MENU_PAGE_REQUEST_COMPLETED,
+  GET_MENU_PAGE_REQUEST_FAILED,
   SET_SELECTED_CATEGORY,
   SET_LOAD_MORE_BUTTON_CLICKED_FOR_CATEGORY,
 } from "./menu.constants";
 
-import { products } from "../../data/products";
 
 const initialState = {
   isLoading: false,
@@ -27,24 +26,22 @@ console.log("=================");
 
 const menuRecuer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_MENU_PAGE:
+    case GET_MENU_PAGE_REQUESTED:
       return {
         ...state,
         isLoading: true,
-        error: null,
       };
-    case GET_MENU_PAGE_COMPLETED:
+    case GET_MENU_PAGE_REQUEST_COMPLETED:
       return {
         ...state,
         isLoading: false,
         data: action.payload,
         error: null,
       };
-    case GET_MENU_PAGE_FAILED:
+    case GET_MENU_PAGE_REQUEST_FAILED:
       return {
         ...state,
         isLoading: false,
-        data: {},
         error: action.payload,
       };
 

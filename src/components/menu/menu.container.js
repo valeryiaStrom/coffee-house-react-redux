@@ -9,9 +9,9 @@ import {
   selectGetIsLoadMoreButtonClicked,
 } from "../../selectors/menu.selector";
 import {
+  getMenuPage,
   setSelectedCategory,
   setLoadMoreButtonClickedForCategory,
-  getMenuPage,
 } from "../../store/menu/menu.actions";
 
 const MenuContainer = ({
@@ -26,9 +26,10 @@ const MenuContainer = ({
 }) => {
   return (
     <Menu
+      onGetMenuPage={getMenuPage}
       categories={categories}
       selectedCategory={selectedCategory}
-      products={getMenuPage}
+      products={products}
       isLoading={isLoading}
       isLoadMoreButtonClickedForCategory={isLoadMoreButtonClickedForCategory}
       setSelectedCategory={setSelectedCategory}

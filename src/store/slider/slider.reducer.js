@@ -4,8 +4,6 @@ import {
   GET_SLIDES_REQUEST_FAILED,
 } from "./slider.constants";
 
-import { slides } from "../../data/slides";
-
 const initialState = {
   isLoading: false,
   slides: [],
