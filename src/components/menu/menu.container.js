@@ -9,7 +9,7 @@ import {
   selectGetIsLoadMoreButtonClicked,
 } from "../../selectors/menu.selector";
 import {
-  getMenuPage,
+  getMenuPageRequested,
   setSelectedCategory,
   setLoadMoreButtonClickedForCategory,
 } from "../../store/menu/menu.actions";
@@ -50,7 +50,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getMenuPage: () => dispatch(getMenuPage()),
+    getMenuPage: () => dispatch(getMenuPageRequested()),
     setSelectedCategory: (category) => dispatch(setSelectedCategory(category)),
     setLoadMoreButtonClickedForCategory: (categories) =>
       dispatch(setLoadMoreButtonClickedForCategory(categories)),

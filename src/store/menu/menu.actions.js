@@ -8,17 +8,17 @@ import {
 
 import { products } from "../../data/products";
 
-export const getMenuPage = () => {
-  return (dispatch) => {
-    dispatch(getMenuPageRequested());
+// export const getMenuPage = () => {
+//   return (dispatch) => {
+//     dispatch(getMenuPageRequested());
 
-    setTimeout(() => {
-      dispatch(getMenuPageRequestCompleted(products));
-    }, 3000);
-  };
-};
+//     setTimeout(() => {
+//       dispatch(getMenuPageRequestCompleted(products));
+//     }, 3000);
+//   };
+// };
 
-const getMenuPageRequested = () => {
+export const getMenuPageRequested = () => {
   return {
     type: GET_MENU_PAGE_REQUESTED,
   };
