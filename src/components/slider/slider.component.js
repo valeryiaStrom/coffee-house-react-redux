@@ -1,12 +1,17 @@
 import React, { useState, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
+import Loader from "../../base/loader/loader";
 const INITIAL_ACTIVE_CONTROL_INDEX = 0;
 
-const Slider = ({ slides }) => {
+const Slider = ({ isLoading, slides, onGetSlides }) => {
   const [activeControlIndex, setActiveControlIndex] = useState(
     INITIAL_ACTIVE_CONTROL_INDEX
   );
   const [touch, setTouch] = useState({ startX: null, startY: null });
+
+  useEffect(() => {
+    onGetSlides();
+  }, []);
 
   const controlsRef = useRef();
   const carouselRef = useRef();
@@ -131,6 +136,7 @@ const Slider = ({ slides }) => {
         >
           <span className='icon slider__arrow-icon slider__arrow-icon_left'></span>
         </span>
+        {isLoading && <Loader />}
         <ul className='slider__slides'>
           {slides.map((slide, i) => {
             return (
@@ -166,6 +172,7 @@ const Slider = ({ slides }) => {
           <span className='icon slider__arrow-icon slider__arrow-icon_right'></span>
         </span>
       </div>
+
       <div className='slider__controls'>
         <div className='controls' ref={controlsRef}>
           {slides.map((slide, i) => {

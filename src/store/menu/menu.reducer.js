@@ -9,7 +9,7 @@ import {
 import { products } from "../../data/products";
 
 const initialState = {
-  isLoading: true,
+  isLoading: false,
   categories: ["coffee", "tea", "dessert"],
   selectedCategory: "coffee",
   isLoadMoreButtonClicked: {
@@ -17,7 +17,7 @@ const initialState = {
     tea: false,
     dessert: false,
   },
-  data: products,
+  data: [],
   error: null,
 };
 
@@ -30,7 +30,6 @@ const menuRecuer = (state = initialState, action) => {
     case GET_MENU_PAGE:
       return {
         ...state,
-        data: products,
         isLoading: true,
         error: null,
       };

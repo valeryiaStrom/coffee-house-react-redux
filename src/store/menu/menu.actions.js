@@ -6,10 +6,25 @@ import {
   SET_LOAD_MORE_BUTTON_CLICKED_FOR_CATEGORY,
 } from "./menu.constants";
 
-export const getMenuPage = (payload) => {
-  return {
-    type: GET_MENU_PAGE,
-    payload,
+import { products } from "../../data/products";
+
+export const getMenuPage = () => {
+  // return {
+  //   type: GET_MENU_PAGE,
+  //   payload,
+  // };
+
+  return (dispatch) => {
+    dispatch({
+      type: GET_MENU_PAGE,
+    });
+
+    setTimeout(() => {
+      dispatch({
+        type: GET_MENU_PAGE_COMPLETED,
+        payload: products,
+      })
+    }, 3000)
   };
 };
 

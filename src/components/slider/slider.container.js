@@ -1,16 +1,24 @@
 import React from "react";
 import { connect } from "react-redux";
 import Slider from "./slider.component";
-import { selectGetSlides } from "../../pages/slider.selector";
+import { selectIsLoading, selectGetSlides } from "../../pages/slider.selector";
+import { getSlides } from "../../store/slider/slider.actions";
 
-const SliderContainer = ({ slides }) => {
-  return <Slider slides={slides} />;
+const SliderContainer = ({ isLoading, slides, getSlides }) => {
+  return <Slider slides={slides} isLoading={isLoading} onGetSlides={getSlides}/>;
 };
 
 const mapStateToProps = (state) => {
   return {
+    isLoading: selectIsLoading(state),
     slides: selectGetSlides(state),
   };
 };
 
-export default connect(mapStateToProps)(SliderContainer);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getSlides: () => dispatch(getSlides()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SliderContainer);

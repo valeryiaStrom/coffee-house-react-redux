@@ -11,9 +11,11 @@ import {
 import {
   setSelectedCategory,
   setLoadMoreButtonClickedForCategory,
+  getMenuPage,
 } from "../../store/menu/menu.actions";
 
 const MenuContainer = ({
+  getMenuPage,
   categories,
   selectedCategory,
   products,
@@ -26,7 +28,7 @@ const MenuContainer = ({
     <Menu
       categories={categories}
       selectedCategory={selectedCategory}
-      products={products}
+      products={getMenuPage}
       isLoading={isLoading}
       isLoadMoreButtonClickedForCategory={isLoadMoreButtonClickedForCategory}
       setSelectedCategory={setSelectedCategory}
@@ -47,6 +49,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    getMenuPage: () => dispatch(getMenuPage()),
     setSelectedCategory: (category) => dispatch(setSelectedCategory(category)),
     setLoadMoreButtonClickedForCategory: (categories) =>
       dispatch(setLoadMoreButtonClickedForCategory(categories)),
