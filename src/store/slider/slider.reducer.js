@@ -10,10 +10,6 @@ const initialState = {
   error: null,
 };
 
-console.log("slider initial state:");
-console.log(initialState);
-console.log("=================");
-
 const sliderReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_SLIDES_REQUESTED:

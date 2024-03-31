@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
 import Wrapper from "../../base/wrapper/wrapper";
 import Tabs from "../../base/tabs/tabs";
@@ -33,8 +33,6 @@ const Menu = ({
   const [clientWidth, setClientWidth] = useState(getClientWidth);
   const [clickedMenuItemId, setClickedMenuItemId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  console.log("re-rendering");
 
   useEffect(() => {
     onGetMenuPage();
@@ -82,13 +80,13 @@ const Menu = ({
     return tabs;
   };
 
-  const handleMenuTabClick = useCallback((e) => {
+  const handleMenuTabClick = (e) => {
     if (e.target.closest(".tab")) {
       const clickedTab = e.target.closest(".tab");
       const clickedTabId = clickedTab.getAttribute("data-id");
       setSelectedCategory(clickedTabId);
     }
-  }, []);
+  };
 
   const createMenuItems = () => {
     const menuItems = [];
@@ -120,7 +118,6 @@ const Menu = ({
   };
 
   const handleLoadMoreButtonClick = () => {
-    console.log("load more clicked");
     setLoadMoreButtonClickedForCategory({
       ...isLoadMoreButtonClickedForCategory,
       [selectedCategory]: true,

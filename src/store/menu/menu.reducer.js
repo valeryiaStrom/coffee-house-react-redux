@@ -20,10 +20,6 @@ const initialState = {
   error: null,
 };
 
-console.log("menu page initial state:");
-console.log(initialState);
-console.log("=================");
-
 const menuRecuer = (state = initialState, action) => {
   switch (action.type) {
     case GET_MENU_PAGE_REQUESTED:
