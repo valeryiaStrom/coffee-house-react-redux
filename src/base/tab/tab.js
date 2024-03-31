@@ -6,6 +6,8 @@ const Tab = ({ id, isActive = false, tabText, iconCn, iconText, onClick }) => {
   const tabIconClassName = iconCn ? `icon ${iconCn}` : "icon";
   const tabIconText = iconText ? iconText : "";
 
+  console.log("EACH TAB RE RENDER");
+
   return (
     <div className={tabClassName} data-id={id} onClick={onClick}>
       <span className='tab__icon'>

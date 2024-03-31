@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import PropTypes from "prop-types";
 import Wrapper from "../../base/wrapper/wrapper";
 import Tabs from "../../base/tabs/tabs";
@@ -34,7 +34,7 @@ const Menu = ({
   const [clickedMenuItemId, setClickedMenuItemId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  console.log(products);
+  console.log("re-rendering");
 
   useEffect(() => {
     onGetMenuPage();
@@ -63,7 +63,7 @@ const Menu = ({
     }
   }, [isModalOpen]);
 
-  const createTabs = useMemo(() => {
+  const createTabs = () => {
     const tabsData = prepareTabsData(categories);
     const tabs = [];
 
@@ -80,17 +80,17 @@ const Menu = ({
     });
 
     return tabs;
-  }, [categories, selectedCategory]);
+  };
 
-  const handleMenuTabClick = (e) => {
+  const handleMenuTabClick = useCallback((e) => {
     if (e.target.closest(".tab")) {
       const clickedTab = e.target.closest(".tab");
       const clickedTabId = clickedTab.getAttribute("data-id");
       setSelectedCategory(clickedTabId);
     }
-  };
+  }, []);
 
-  const createMenuItems = useMemo(() => {
+  const createMenuItems = () => {
     const menuItems = [];
     products.forEach((item, i) => {
       menuItems.push(<MenuItem props={item} key={i} />);
@@ -105,14 +105,9 @@ const Menu = ({
     }
 
     return menuItems;
-  }, [
-    products,
-    clientWidth,
-    isLoadMoreButtonClickedForCategory,
-    selectedCategory,
-  ]);
+  };
 
-  const shouldShowLoadMoreButton = useMemo(() => {
+  const shouldShowLoadMoreButton = () => {
     if (
       products.length > MAX_PRODUCTS_COUNT_TABLET &&
       clientWidth <= TABLET_SMALL_WIDTH &&
@@ -122,12 +117,7 @@ const Menu = ({
     }
 
     return false;
-  }, [
-    products,
-    clientWidth,
-    isLoadMoreButtonClickedForCategory,
-    selectedCategory,
-  ]);
+  };
 
   const handleLoadMoreButtonClick = () => {
     console.log("load more clicked");
@@ -161,6 +151,28 @@ const Menu = ({
     }
   };
 
+  const tabs = useMemo(() => {
+    return createTabs();
+  }, [categories, selectedCategory]);
+
+  const menuItems = useMemo(() => {
+    return createMenuItems();
+  }, [
+    products,
+    clientWidth,
+    isLoadMoreButtonClickedForCategory,
+    selectedCategory,
+  ]);
+
+  const showLoadMoreButton = useMemo(() => {
+    return shouldShowLoadMoreButton();
+  }, [
+    products,
+    clientWidth,
+    isLoadMoreButtonClickedForCategory,
+    selectedCategory,
+  ]);
+
   return (
     <section className='menu' id='menu'>
       <Wrapper cn='menu__wrapper'>
@@ -170,14 +182,14 @@ const Menu = ({
         </h2>
         <div className='menu__tabs-wrapper'>
           <Tabs cn={"menu__tabs"} onTabClick={handleMenuTabClick}>
-            {createTabs}
+            {tabs}
           </Tabs>
         </div>
         <MenuItems onClick={handleMenuItemClick}>
           {isLoading && <Loader />}
-          {createMenuItems}
+          {menuItems}
         </MenuItems>
-        <MenuLoadMoreButton showButton={shouldShowLoadMoreButton}>
+        <MenuLoadMoreButton showButton={showLoadMoreButton}>
           <LoadMoreButton onButtonClick={handleLoadMoreButtonClick} />
         </MenuLoadMoreButton>
       </Wrapper>
