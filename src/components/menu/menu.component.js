@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
 import Wrapper from "../../base/wrapper/wrapper";
 import Tabs from "../../base/tabs/tabs";
@@ -63,7 +63,7 @@ const Menu = ({
     }
   }, [isModalOpen]);
 
-  const createTabs = (categories) => {
+  const createTabs = useMemo(() => {
     const tabsData = prepareTabsData(categories);
     const tabs = [];
 
@@ -80,7 +80,7 @@ const Menu = ({
     });
 
     return tabs;
-  };
+  }, [categories, selectedCategory]);
 
   const handleMenuTabClick = (e) => {
     if (e.target.closest(".tab")) {
@@ -90,7 +90,7 @@ const Menu = ({
     }
   };
 
-  const createMenuItems = (products) => {
+  const createMenuItems = useMemo(() => {
     const menuItems = [];
     products.forEach((item, i) => {
       menuItems.push(<MenuItem props={item} key={i} />);
@@ -105,9 +105,14 @@ const Menu = ({
     }
 
     return menuItems;
-  };
+  }, [
+    products,
+    clientWidth,
+    isLoadMoreButtonClickedForCategory,
+    selectedCategory,
+  ]);
 
-  const shouldShowLoadMoreButton = (products) => {
+  const shouldShowLoadMoreButton = useMemo(() => {
     if (
       products.length > MAX_PRODUCTS_COUNT_TABLET &&
       clientWidth <= TABLET_SMALL_WIDTH &&
@@ -117,7 +122,12 @@ const Menu = ({
     }
 
     return false;
-  };
+  }, [
+    products,
+    clientWidth,
+    isLoadMoreButtonClickedForCategory,
+    selectedCategory,
+  ]);
 
   const handleLoadMoreButtonClick = () => {
     console.log("load more clicked");
@@ -151,10 +161,6 @@ const Menu = ({
     }
   };
 
-  const tabs = createTabs(categories);
-  const menuItems = createMenuItems(products);
-  const showLoadMoreButton = shouldShowLoadMoreButton(products);
-
   return (
     <section className='menu' id='menu'>
       <Wrapper cn='menu__wrapper'>
@@ -164,14 +170,14 @@ const Menu = ({
         </h2>
         <div className='menu__tabs-wrapper'>
           <Tabs cn={"menu__tabs"} onTabClick={handleMenuTabClick}>
-            {tabs}
+            {createTabs}
           </Tabs>
         </div>
         <MenuItems onClick={handleMenuItemClick}>
           {isLoading && <Loader />}
-          {menuItems}
+          {createMenuItems}
         </MenuItems>
-        <MenuLoadMoreButton showButton={showLoadMoreButton}>
+        <MenuLoadMoreButton showButton={shouldShowLoadMoreButton}>
           <LoadMoreButton onButtonClick={handleLoadMoreButtonClick} />
         </MenuLoadMoreButton>
       </Wrapper>
