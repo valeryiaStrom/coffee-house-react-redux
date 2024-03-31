@@ -34,6 +34,8 @@ const Menu = ({
   const [clickedMenuItemId, setClickedMenuItemId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  console.log(products);
+
   useEffect(() => {
     onGetMenuPage();
   }, []);
@@ -180,25 +182,34 @@ const Menu = ({
 
 Menu.propTypes = {
   onGetMenuPage: PropTypes.func.isRequired,
-  categories: PropTypes.array.isRequired,
+  categories: PropTypes.arrayOf(PropTypes.string).isRequired,
   selectedCategory: PropTypes.string.isRequired,
-  products: PropTypes.array.isRequired,
+  products: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string,
+      description: PropTypes.string,
+      imageSrc: PropTypes.string,
+      price: PropTypes.string,
+      currency: PropTypes.string,
+      category: PropTypes.string,
+      sizes: PropTypes.object,
+      additives: PropTypes.arrayOf(
+        PropTypes.shape({
+          name: PropTypes.string,
+          "add-price": PropTypes.string,
+        })
+      ),
+    })
+  ).isRequired,
   isLoading: PropTypes.bool.isRequired,
   isLoadMoreButtonClickedForCategory: PropTypes.shape({
-    coffee: PropTypes.bool.isRequired,
-    tea: PropTypes.bool.isRequired,
-    dessert: PropTypes.bool.isRequired,
-  }),
+    coffee: PropTypes.bool,
+    tea: PropTypes.bool,
+    dessert: PropTypes.bool,
+  }).isRequired,
   setSelectedCategory: PropTypes.func.isRequired,
   setLoadMoreButtonClickedForCategory: PropTypes.func.isRequired,
-};
-
-Menu.defaultProps = {
-  isLoadMoreButtonClickedForCategory: {
-    coffee: false,
-    tea: false,
-    dessert: false,
-  },
 };
 
 export default Menu;
