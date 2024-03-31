@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import PropTypes from "prop-types";
 import Wrapper from "../../base/wrapper/wrapper";
 import Tabs from "../../base/tabs/tabs";
@@ -80,13 +80,13 @@ const Menu = ({
     return tabs;
   };
 
-  const handleMenuTabClick = (e) => {
+  const handleMenuTabClick = useCallback((e) => {
     if (e.target.closest(".tab")) {
       const clickedTab = e.target.closest(".tab");
       const clickedTabId = clickedTab.getAttribute("data-id");
       setSelectedCategory(clickedTabId);
     }
-  };
+  }, []);
 
   const createMenuItems = () => {
     const menuItems = [];
@@ -139,14 +139,14 @@ const Menu = ({
     return modal;
   };
 
-  const handleMenuItemClick = (e) => {
+  const handleMenuItemClick = useCallback((e) => {
     if (e.target.closest(".menu__item")) {
       const clickedMenuItem = e.target.closest(".menu__item");
       const clickedMenuItemId = clickedMenuItem.getAttribute("data-id");
       setClickedMenuItemId(clickedMenuItemId);
       setIsModalOpen(true);
     }
-  };
+  }, []);
 
   const tabs = useMemo(() => {
     return createTabs();
@@ -182,10 +182,8 @@ const Menu = ({
             {tabs}
           </Tabs>
         </div>
-        <MenuItems onClick={handleMenuItemClick}>
-          {isLoading && <Loader />}
-          {menuItems}
-        </MenuItems>
+        {isLoading && <Loader />}
+        <MenuItems onClick={handleMenuItemClick}>{menuItems}</MenuItems>
         <MenuLoadMoreButton showButton={showLoadMoreButton}>
           <LoadMoreButton onButtonClick={handleLoadMoreButtonClick} />
         </MenuLoadMoreButton>

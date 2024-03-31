@@ -10,8 +10,8 @@ const MenuItems = ({ children, onClick }) => {
 };
 
 MenuItems.propTypes = {
-  children: PropTypes.array,
+  children: PropTypes.arrayOf(PropTypes.element),
   onClick: PropTypes.func.isRequired,
 };
 
-export default MenuItems;
+export default React.memo(MenuItems);
