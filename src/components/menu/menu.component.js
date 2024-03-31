@@ -179,6 +179,7 @@ const Menu = ({
 };
 
 Menu.propTypes = {
+  onGetMenuPage: PropTypes.func.isRequired,
   categories: PropTypes.array.isRequired,
   selectedCategory: PropTypes.string.isRequired,
   products: PropTypes.array.isRequired,
