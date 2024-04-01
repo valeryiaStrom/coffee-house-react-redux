@@ -124,9 +124,9 @@ const Menu = ({
     });
   };
 
-  const createModalWindow = (data) => {
+  const createModalWindow = () => {
     // get modal data by clicked menu item id
-    const productData = getDataItemById(data, clickedMenuItemId);
+    const productData = getDataItemById(products, clickedMenuItemId);
 
     // prepare data for modal window
     const preparedProductData = prepareProductData(productData);
@@ -188,7 +188,7 @@ const Menu = ({
           <LoadMoreButton onButtonClick={handleLoadMoreButtonClick} />
         </MenuLoadMoreButton>
       </Wrapper>
-      {isModalOpen && createModalWindow(products)}
+      {isModalOpen && createModalWindow()}
     </section>
   );
 };
