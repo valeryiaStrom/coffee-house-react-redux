@@ -177,17 +177,4 @@ MenuItemModal.propTypes = {
   isOpen: PropTypes.func.isRequired,
 };
 
-MenuItemModal.defaultProps = {
-  data: {
-    id: "",
-    imageSrc: "",
-    name: "",
-    description: "",
-    price: "",
-    currency: "",
-    sizes: [],
-    additives: [],
-  },
-};
-
 export default MenuItemModal;
